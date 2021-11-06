@@ -1,0 +1,6 @@
+{
+    "sketch": "Prueba_encoder.ino",
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "port": "COM3"
+}

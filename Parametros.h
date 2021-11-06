@@ -5,6 +5,8 @@
 #include <Arduino.h>
 
 #define GRADOS_POR_TIC 5.50
+#define PULSOS_A_GRADOS(x) (x)/5.50
+#define GRADOS_A_PULSOS(x) (x)*5.50
 
 
 // ------- ENCODERS -------

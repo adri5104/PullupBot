@@ -1,0 +1,3 @@
+/*Esta clase sera la encargada de decodificar la informacion que llega
+por el puerto serie y tomar las decisiones en base a ello mandando mensajes
+a un objeto pullup que puede tener como atributo */

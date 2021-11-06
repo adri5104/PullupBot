@@ -11,11 +11,11 @@ class Controlposicion
         int kp;
         int kd;
         int ki;
-        long tiempo_previo;
-        int referencia_tics;
-        float error_acumulado;
+        long tiempo_previo; //para calcular deltaT
+        int referencia_tics; //referencia para el PID en pulsos
+        float error_acumulado; //Se va sumando el error
         float error_previo;
-        bool motorApagado;
+        bool motorApagado; //senal digital que habilita o deshabilita el PID();
 
         Motor* myMotor;
         Encoder* myEncoder;

@@ -23,23 +23,17 @@ y devolver la posicion del robot (cinematica directa)
 class Pullup
 {
     private:
-        Endstop* myEndstop_A;
-        Endstop* myEndstop_B;
-        Endstop* myEndstop_C;
-        Controlposicion* control_A;
-        Controlposicion* control_B;
-        Controlposicion* control_C;
-        Motor* Motor_A;
-        Motor* Motor_B;
-        Motor* Motor_C;
+        Endstop* misEndstops[3];
+        Controlposicion* misControles[3];
+        Motor* misMotores[3];
+        Encoder* misEncoders[3];
 
         //stepper
 
     public:
-        //pullup(mazo pines);
-        // void pullup_logic(); // donde se actualizan los pids
-        // lo que actualice los encoders
+        Pullup();
+        void init();
 
         void setPosicionArticulares(float, float, float, float);
         
-}
+};

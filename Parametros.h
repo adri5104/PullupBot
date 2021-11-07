@@ -3,6 +3,7 @@
 
 
 #include <Arduino.h>
+#include <stdio.h>
 
 #define GRADOS_POR_TIC 5.50
 #define PULSOS_A_GRADOS(x) (x)/5.50
@@ -38,8 +39,20 @@
 #define PIN_MOTORC_IN2 10
 #define PIN_MOTORC_PWM 11
 
+// ------- FINALES DE CARRERA -------
+#define PIN_ENDSTOPA 1
+#define PIN_ENDSTOPB 2
+#define PIN_ENDSTOPC 3
+
 // ------- DEBUGGING -------
-#define DEBUGGING_
+//#define DEBUGGING_
+
+
+
+//Otras movidas
+#define A 0
+#define B 1
+#define C 2
 
 
 #endif

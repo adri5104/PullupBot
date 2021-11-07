@@ -16,7 +16,6 @@ class Controlposicion
         float error_acumulado; //Se va sumando el error
         float error_previo;
         bool motorApagado; //senal digital que habilita o deshabilita el PID();
-
         Motor* myMotor;
         Encoder* myEncoder;
 
@@ -27,8 +26,6 @@ class Controlposicion
         void apagarMotor(); //deja libre el motor;
         void setGains(int, int, int); //Para dar las ganancias kp, ki y kd
         void control_logic(); // Donde se actualizan los valores del PID();
-        
-
 };
 
 

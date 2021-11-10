@@ -56,8 +56,6 @@
 // ------- DEBUGGING -------
 #define DEBUGGING_
 
-
-
 //Otras movidas
 #define A 0
 #define B 1

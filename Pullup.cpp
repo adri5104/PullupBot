@@ -47,3 +47,54 @@ Controlposicion* Pullup::getControlposicion(int quecontrol)
 {
     return misControles[quecontrol];
 }
+
+Stepper* Pullup::getStepper()
+{
+    return miStepper;
+}
+
+void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC, float mmstepper)
+{
+    misControles[A]->setPosicionGrados(gradosA);
+    misControles[B]->setPosicionGrados(gradosB);
+    misControles[C]->setPosicionGrados(gradosC);
+
+    miStepper->setPosition(mmstepper);
+}
+
+void Pullup::goHome()
+{
+    if(misEndstops[A]->pressed())
+    {
+        misMotores[A]->setFree();
+        misEncoders[A]->resetPosicion();
+    }
+    else
+    {
+        misMotores[A]->setPWM(55);
+        misMotores[A]->setBack();
+    }
+
+    if(misEndstops[B]->pressed())
+    {
+        misMotores[B]->setFree();
+        misEncoders[B]->resetPosicion();
+    }
+    else
+    {
+        misMotores[B]->setPWM(55);
+        misMotores[B]->setBack();
+    }
+
+    if(misEndstops[C]->pressed())
+    {
+        misMotores[C]->setFree();
+        misEncoders[C]->resetPosicion();
+    }
+    else
+    {
+        misMotores[C]->setPWM(55);
+        misMotores[C]->setBack();
+    }
+}
+

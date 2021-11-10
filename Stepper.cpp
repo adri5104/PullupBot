@@ -1,19 +1,19 @@
 #include "Stepper.h"
 #include <arduino.h>
 
-stepper::stepper() {
+Stepper::Stepper() {
 
     is_moving = false;
 
 }
 
-void stepper::setPosition(float npx) {
+void Stepper::setPosition(float npx) {
 
     px = npx;
 
 }
 
-void stepper::prepareMove(float newx) {
+void Stepper::prepareMove(float newx) {
 
     obj = (newx - px) * STEPS_PER_MM;
     absobj = abs(obj);
@@ -31,7 +31,7 @@ void stepper::prepareMove(float newx) {
 }
 
 
-void stepper::move() {
+void Stepper::move() {
 
     unsigned long curtime = millis();
 
@@ -53,13 +53,13 @@ void stepper::move() {
 }
 
 
-void stepper::disableMotor() {
+void Stepper::disableMotor() {
 
     digitalWrite(enable_pin, HIGH);
 
 }
 
-void stepper::enableMotor() {
+void Stepper::enableMotor() {
 
     digitalWrite(enable_pin, LOW);
 

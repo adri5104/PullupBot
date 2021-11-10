@@ -3,7 +3,7 @@
 #define dir_pin 20
 #define enable_pin 36
 
-class stepper {
+class Stepper {
 public:
     bool is_moving;
     long millisbetweensteps;  //probar con 25, si va muy rapido se aumenta

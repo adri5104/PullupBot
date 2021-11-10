@@ -18,8 +18,6 @@ y devolver la posicion del robot (cinematica directa)
 #include "ControlPosicion.h"
 #include "Stepper.h"
 #include "Endstop.h"
-
-
 class Pullup
 {
     private:
@@ -27,6 +25,7 @@ class Pullup
         Controlposicion* misControles[3];
         Motor* misMotores[3];
         Encoder* misEncoders[3];
+        Stepper* miStepper;
 
         //stepper
 
@@ -36,7 +35,7 @@ class Pullup
         Motor* getMotor(int);
         Encoder* getEncoder(int);
         Controlposicion* getControlposicion(int);
-
-        void setPosicionArticulares(float, float, float, float);
-        
+        Stepper* getStepper();
+        void setPosicionArticulares(float, float, float, float);     
+        void goHome();
 };

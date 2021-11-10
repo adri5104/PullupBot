@@ -47,4 +47,5 @@ void loop()
   Serial.print(",");
   Serial.print(MyRobot.getEncoder(A)->getPosicionGrados());
   #endif
+  MyRobot.goHome();
 }

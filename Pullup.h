@@ -13,11 +13,15 @@ y devolver la posicion del robot (cinematica directa)
 
     */
 
+#ifndef _PULLUP_
+#define _PULLUP_
+
 #include "Motor.h"
 #include "Encoder.h"
 #include "ControlPosicion.h"
 #include "Stepper.h"
 #include "Endstop.h"
+#include <Arduino.h>
 class Pullup
 {
     private:
@@ -38,4 +42,8 @@ class Pullup
         Stepper* getStepper();
         void setPosicionArticulares(float, float, float, float);     
         void goHome();
+        void printMovidas();
+        void RobotLogic();
 };
+
+#endif

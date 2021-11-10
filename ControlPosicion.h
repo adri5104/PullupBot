@@ -17,7 +17,6 @@ class Controlposicion
         bool motorApagado; //senal digital que habilita o deshabilita el PID();
         Motor* myMotor;
         Encoder* myEncoder;
-
     public: 
         Controlposicion(Motor*, Encoder*);
         void setPosicionTics(int); //LLeva al motor a una posicion en tics;
@@ -25,5 +24,6 @@ class Controlposicion
         void apagarMotor(); //deja libre el motor;
         void setGains(int, int, int); //Para dar las ganancias kp, ki y kd
         void control_logic(); // Donde se actualizan los valores del PID();
+        float getError(){return error_previo;};
 };
 #endif

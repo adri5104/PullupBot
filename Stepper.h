@@ -16,7 +16,7 @@ public:
     long obj; //numero de pasos a moverse
     long absobj; //numero de pasos en valor absoluto
 
-    stepper();
+    Stepper();
     void setPosition(float npx);
     void prepareMove(float newx);
     void move();

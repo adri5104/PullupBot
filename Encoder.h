@@ -2,7 +2,7 @@
 
 #ifndef _ENCODER_
 #define _ENCODER_
-
+#include<Arduino.h>
 
 class Encoder
 {

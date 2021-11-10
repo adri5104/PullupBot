@@ -1,5 +1,5 @@
 {
-    "sketch": "Prueba_encoder.ino",
+    "sketch": "Codigo_pullup.ino",
     "board": "arduino:sam:arduino_due_x_dbg",
-    "port": "COM3"
+    "port": "COM11"
 }

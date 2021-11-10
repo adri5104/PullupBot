@@ -20,17 +20,30 @@ Pullup::Pullup()
     misControles[A] = new Controlposicion(misMotores[A], misEncoders[A]);
     misControles[B] = new Controlposicion(misMotores[B], misEncoders[B]);
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
+
+    pinMode(PIN_STBY_1, OUTPUT);
+    pinMode(PIN_STBY_2, OUTPUT);
+    digitalWrite(PIN_STBY_1, HIGH);
+    digitalWrite(PIN_STBY_2, HIGH);
+    digitalWrite(LED_BUILTIN, HIGH);
+
+    miStepper = NULL;
 }
 
 void Pullup::init()
 {
-    int i;
-    for(i=0; i<3; i++)
-    {
-        misMotores[i]->init();
-        misEncoders[i]->init();
-        misEndstops[i]->init();
-    }
+    misMotores[A] -> init();
+    misMotores[B] -> init();
+    misMotores[C] -> init();
+
+    misEncoders[A]->init();
+    misEncoders[B] -> init();
+    misEncoders[C]->init();
+
+    misEndstops[A]->init();
+    misEndstops[B]->init();
+    misEndstops[C]->init();
+
 }
 
 Motor* Pullup::getMotor(int quemotor)
@@ -58,8 +71,7 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
     misControles[A]->setPosicionGrados(gradosA);
     misControles[B]->setPosicionGrados(gradosB);
     misControles[C]->setPosicionGrados(gradosC);
-
-    miStepper->setPosition(mmstepper);
+    //miStepper->setPosition(mmstepper);
 }
 
 void Pullup::goHome()
@@ -96,5 +108,29 @@ void Pullup::goHome()
         misMotores[C]->setPWM(55);
         misMotores[C]->setBack();
     }
+}
+
+void Pullup::printMovidas()
+{
+    Serial.print("Errores: ");
+    Serial.print(misControles[A]->getError());
+    Serial.print(", ");
+    Serial.print(misControles[B]->getError());
+    Serial.print(", ");
+    Serial.print(misControles[C]->getError());
+}
+
+void Pullup::RobotLogic()
+{
+    misControles[A]->control_logic();
+    misControles[B]->control_logic();
+    misControles[C]->control_logic();
+
+    if((misEndstops[C]->pressed() && (misEndstops[A]->pressed()) && (misEndstops[B]->pressed()))) digitalWrite(LED_BUILTIN, HIGH);
+    else digitalWrite(LED_BUILTIN, 0x0);
+
+    if(misEndstops[A]->pressed()) misMotores[A]->setFree();
+    if(misEndstops[B]->pressed()) misMotores[B]->setFree();
+    if(misEndstops[C]->pressed()) misMotores[C]->setFree(); 
 }
 

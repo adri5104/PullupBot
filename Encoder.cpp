@@ -42,3 +42,8 @@ int Encoder::getTics()
 {
     return posicion_tics;
 }
+
+void Encoder::resetPosicion()
+{
+    posicion_grados = 0;
+}

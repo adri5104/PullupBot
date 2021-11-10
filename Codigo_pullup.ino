@@ -36,7 +36,14 @@ void handler_encoderC()
 
 void setup() {
   //Se inicializan las movidas
+
+  
   myPullup.init();
+  pinMode(PIN_STBY_1, OUTPUT);
+  pinMode(PIN_STBY_2, OUTPUT);
+  digitalWrite(PIN_STBY_1, HIGH);
+  digitalWrite(PIN_STBY_2, HIGH);
+    
 
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
@@ -56,6 +63,9 @@ void setup() {
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
 
+
+Serial.begin(9600);
+
 }
 
 //Variables leidas en el Serial
@@ -63,6 +73,8 @@ float a,b,c;
 
 void loop() 
 {
+
+  
   //Lectura del serial
   while(Serial.available())
   {
@@ -72,12 +84,21 @@ void loop()
     if (Serial.read() == '\n') break;
   }
 
+
+
   myPullup.RobotLogic();
   myPullup.setPosicionArticulares(a,b,c,0);
   myPullup.printMovidas();
+  myPullup.printGrados();
 
 
 
+  //myPullup.getMotor(C)->setFwd();
+  //myPullup.getMotor(C)->setPWM(255);
+  //myPullup.getMotor(A)->setFwd();
+  //myPullup.getMotor(A)->setPWM(255); 
+  //myPullup.getMotor(B)->setFwd();
+  //myPullup.getMotor(B)->setPWM(255);
   #ifdef DEBUGGING_
   Serial.print(Control_A->getError());
   Serial.print(",");

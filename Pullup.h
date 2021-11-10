@@ -28,6 +28,7 @@ class Pullup
         Endstop* misEndstops[3];
         Controlposicion* misControles[3];
         Motor* misMotores[3];
+        Motor* Motor_A;
         Encoder* misEncoders[3];
         Stepper* miStepper;
 
@@ -43,6 +44,7 @@ class Pullup
         void setPosicionArticulares(float, float, float, float);     
         void goHome();
         void printMovidas();
+        void printGrados();
         void RobotLogic();
 };
 

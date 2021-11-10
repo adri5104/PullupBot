@@ -42,8 +42,6 @@ void Controlposicion::apagarMotor()
 
 void Controlposicion::control_logic()
 {
-    if(motorApagado = false)
-    {
         int pwr; //senal de pwr para el motor
         float deltaT = ((float)(micros()-tiempo_previo)) / 1.0e6; //intervalo de tiempo
         int error = (myEncoder->getTics()) - referencia_tics;
@@ -73,11 +71,4 @@ void Controlposicion::control_logic()
             myMotor->setBack();
             myMotor->setPWM(pwr);
         }
-    }
-    else
-    {
-        myMotor ->setFree();
-    }
-
-
 }

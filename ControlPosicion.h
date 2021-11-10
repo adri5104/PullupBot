@@ -4,7 +4,6 @@
 #include"Motor.h"
 #include"Encoder.h"
 #include"Parametros.h"
-
 class Controlposicion
 {
     private:
@@ -27,6 +26,4 @@ class Controlposicion
         void setGains(int, int, int); //Para dar las ganancias kp, ki y kd
         void control_logic(); // Donde se actualizan los valores del PID();
 };
-
-
 #endif

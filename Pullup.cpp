@@ -32,3 +32,18 @@ void Pullup::init()
         misEndstops[i]->init();
     }
 }
+
+Motor* Pullup::getMotor(int quemotor)
+{
+    return misMotores[quemotor];
+}
+
+Encoder* Pullup::getEncoder(int queencoder)
+{
+    return misEncoders[queencoder];
+}
+
+Controlposicion* Pullup::getControlposicion(int quecontrol)
+{
+    return misControles[quecontrol];
+}

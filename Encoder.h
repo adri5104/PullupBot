@@ -20,7 +20,6 @@ class Encoder
         float getPosicionGrados();
         int getTics();
         void resetPosicion(); //Pone la posicion a 0;
-
 };
 
 

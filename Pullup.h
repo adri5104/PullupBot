@@ -33,6 +33,9 @@ class Pullup
     public:
         Pullup();
         void init();
+        Motor* getMotor(int);
+        Encoder* getEncoder(int);
+        Controlposicion* getControlposicion(int);
 
         void setPosicionArticulares(float, float, float, float);
         

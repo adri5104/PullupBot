@@ -28,16 +28,25 @@
 #define PIN_MOTORA_IN1 3
 #define PIN_MOTORA_IN2 4
 #define PIN_MOTORA_PWM 5
+#define KP_A 1
+#define KI_A 0
+#define KD_A 0
 
 // Motor A
 #define PIN_MOTORB_IN1 6
 #define PIN_MOTORB_IN2 7
 #define PIN_MOTORB_PWM 8
+#define KP_B 1
+#define KI_B 0
+#define KD_B 0
 
 // Motor A
 #define PIN_MOTORC_IN1 9
 #define PIN_MOTORC_IN2 10
 #define PIN_MOTORC_PWM 11
+#define KP_C 1
+#define KI_C 0
+#define KD_C 0
 
 // ------- FINALES DE CARRERA -------
 #define PIN_ENDSTOPA 1
@@ -45,7 +54,7 @@
 #define PIN_ENDSTOPC 3
 
 // ------- DEBUGGING -------
-//#define DEBUGGING_
+#define DEBUGGING_
 
 
 

@@ -7,7 +7,7 @@
 
 //Nuestro robot
 Pullup myPullup;
-//holi
+
 /*
 Motor* Motor_A = new Motor(PIN_MOTORA_IN1, PIN_MOTORA_IN2, PIN_MOTORA_PWM);
 Encoder* Encoder_A = new Encoder(PIN_MOTORA_CANALA, PIN_MOTORA_CANALB, GRADOS_POR_TIC);

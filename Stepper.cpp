@@ -4,6 +4,7 @@
 Stepper::Stepper() {
 
     is_moving = false;
+    px=0;
 
 }
 
@@ -26,8 +27,6 @@ void Stepper::prepareMove(float newx) {
         setPosition(newx);
     }
 
-    if (is_moving) enableMotor();
-
 }
 
 
@@ -46,21 +45,11 @@ void Stepper::move() {
 
     is_moving = !(step_count >= maxsteps);
 
-    if (!is_moving) {
-        disableMotor();
+}
+
+float Stepper::getPosition(){
+    if(digitalRead(dir_pin)==HIGH){
+      return (previa+step_count);
     }
-
-}
-
-
-void Stepper::disableMotor() {
-
-    digitalWrite(enable_pin, HIGH);
-
-}
-
-void Stepper::enableMotor() {
-
-    digitalWrite(enable_pin, LOW);
-
+    else{ return(previa-step_count);}
 }

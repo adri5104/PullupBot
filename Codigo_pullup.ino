@@ -82,6 +82,7 @@ void loop()
 
   //Cosas que hace el robot.
   myPullup.RobotLogic();
+  
   if(op = 1) myPullup.setPosicionArticulares(a,b,c,0);
   
   if(op = 0) myPullup.setFree();

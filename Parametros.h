@@ -54,7 +54,7 @@
 #define PIN_ENDSTOPC 46
 
 // ------- DEBUGGING -------
-//#define DEBUGGING_
+#define DEBUGGING_
 
 //Otras movidas
 #define A 0

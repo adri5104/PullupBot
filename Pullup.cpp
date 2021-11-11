@@ -38,7 +38,6 @@ void Pullup::init()
     misEndstops[A]->init();
     misEndstops[B]->init();
     misEndstops[C]->init();
-
 }
 
 Motor* Pullup::getMotor(int quemotor)

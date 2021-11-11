@@ -31,9 +31,8 @@ class Pullup
         Motor* Motor_A;
         Encoder* misEncoders[3];
         Stepper* miStepper;
-
         //stepper
-
+        bool isMoving;
     public:
         Pullup();
         void init();
@@ -43,9 +42,10 @@ class Pullup
         Stepper* getStepper();
         void setPosicionArticulares(float, float, float, float);     
         void goHome();
+        void setFree(); //apaga los motores
         void printMovidas();
         void printGrados();
         void RobotLogic();
 };
-
 #endif
+

@@ -1,14 +1,12 @@
 
-
-
-
 #include "Parametros.h"
 #include "Encoder.h"
 #include "ControlPosicion.h"
 #include "Pullup.h"
 #include "Motor.h"
-Pullup myPullup;
 
+//Nuestro robot
+Pullup myPullup;
 /*
 Motor* Motor_A = new Motor(PIN_MOTORA_IN1, PIN_MOTORA_IN2, PIN_MOTORA_PWM);
 Encoder* Encoder_A = new Encoder(PIN_MOTORA_CANALA, PIN_MOTORA_CANALB, GRADOS_POR_TIC);
@@ -20,7 +18,8 @@ Motor* Motor_C = new Motor(PIN_MOTORC_IN1, PIN_MOTORC_IN2, PIN_MOTORC_PWM);
 Encoder* Encoder_C = new Encoder(PIN_MOTORC_CANALA, PIN_MOTORC_CANALB, GRADOS_POR_TIC);
 Controlposicion* Control_C= new Controlposicion(Motor_C, Encoder_C); 
 */
-
+//Funciones para manejar las interrupciones de los encoders. No se puede 
+//llamar a un metodo de una clase desde una interrupcion.
 void handler_encoderA()
 {
   myPullup.getEncoder(A)->actualizar_posicion();  
@@ -33,23 +32,22 @@ void handler_encoderC()
 {
   myPullup.getEncoder(C)->actualizar_posicion();
 }
-
+//Setup. Movidas de cuando se hace reset
 void setup() {
-  //Se inicializan las movidas
 
-  
+  //Se inicializan las movidas
   myPullup.init();
   pinMode(PIN_STBY_1, OUTPUT);
   pinMode(PIN_STBY_2, OUTPUT);
   digitalWrite(PIN_STBY_1, HIGH);
   digitalWrite(PIN_STBY_2, HIGH);
-    
 
+  //Interrupciones de los encoders
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
- 
   Serial.begin(9600);
+
   //Se ponen los parametros de los pids
   myPullup.getControlposicion(A)->setGains(KP_A,KI_A,KD_A);
   myPullup.getControlposicion(B)->setGains(KP_B,KI_B,KD_B);
@@ -62,49 +60,41 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
-
-
-Serial.begin(9600);
-
 }
 
-//Variables leidas en el Serial
+//Variables leidas en el Seria
+int op;
 float a,b,c;
 
+//Lo que se repite
 void loop() 
 {
-
-  
   //Lectura del serial
   while(Serial.available())
   {
+    op = Serial.parseInt();
     a = Serial.parseFloat();
     b = Serial.parseFloat();
     c = Serial.parseFloat();
     if (Serial.read() == '\n') break;
   }
 
-
-
+  //Cosas que hace el robot.
   myPullup.RobotLogic();
-  myPullup.setPosicionArticulares(a,b,c,0);
-  myPullup.printMovidas();
-  myPullup.printGrados();
-
-
-
+  if(op = 1) myPullup.setPosicionArticulares(a,b,c,0);
+  
+  if(op = 0) myPullup.setFree();
+  
+   //Para probar los motores
   //myPullup.getMotor(C)->setFwd();
   //myPullup.getMotor(C)->setPWM(255);
   //myPullup.getMotor(A)->setFwd();
   //myPullup.getMotor(A)->setPWM(255); 
   //myPullup.getMotor(B)->setFwd();
   //myPullup.getMotor(B)->setPWM(255);
-  #ifdef DEBUGGING_
-  Serial.print(Control_A->getError());
-  Serial.print(",");
-  Serial.print(Control_B->getError());
-  Serial.print(",");
-  Serial.println(Control_C->getError());
-  #endif
   
+  #ifdef DEBUGGING_
+  myPullup.printMovidas();
+  myPullup.printGrados();
+  #endif
 }

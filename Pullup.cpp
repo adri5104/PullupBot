@@ -4,7 +4,6 @@
 
 Pullup::Pullup()
 {
-    
     //Motores
     misMotores[A] = new Motor(PIN_MOTORA_IN1, PIN_MOTORA_IN2, PIN_MOTORA_PWM);
     misMotores[B] = new Motor(PIN_MOTORB_IN1, PIN_MOTORB_IN2, PIN_MOTORB_PWM);
@@ -22,19 +21,18 @@ Pullup::Pullup()
     misControles[B] = new Controlposicion(misMotores[B], misEncoders[B]);
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
 
-    
-
     miStepper = NULL;
+    isMoving = true;
 }
 
 void Pullup::init()
 {
-    misMotores[A] -> init();
-    misMotores[B] -> init();
-    misMotores[C] -> init();
+    misMotores[A]->init();
+    misMotores[B]->init();
+    misMotores[C]->init();
 
     misEncoders[A]->init();
-    misEncoders[B] -> init();
+    misEncoders[B]->init();
     misEncoders[C]->init();
 
     misEndstops[A]->init();
@@ -68,6 +66,7 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
     misControles[A]->setPosicionGrados(gradosA);
     misControles[B]->setPosicionGrados(gradosB);
     misControles[C]->setPosicionGrados(gradosC);
+    isMoving = true;
     //miStepper->setPosition(mmstepper);
 }
 
@@ -119,12 +118,13 @@ void Pullup::printMovidas()
 
 void Pullup::RobotLogic()
 {
+    if(isMoving == true)
+    {
     misControles[A]->control_logic();
     misControles[B]->control_logic();
     misControles[C]->control_logic();
+    };
 
-
-    
     if((misEndstops[C]->pressed() && (misEndstops[A]->pressed()) && (misEndstops[B]->pressed()))) digitalWrite(LED_BUILTIN, HIGH);
     else digitalWrite(LED_BUILTIN, 0x0);
     /*
@@ -147,3 +147,10 @@ void Pullup::printGrados()
    Serial.print(", ");
 }
 
+void Pullup::setFree()
+{
+    misMotores[A]->setFree();
+    misMotores[B]->setFree();
+    misMotores[C]->setFree();
+    isMoving = false;
+}

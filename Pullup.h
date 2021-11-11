@@ -41,11 +41,11 @@ class Pullup
         Controlposicion* getControlposicion(int);
         Stepper* getStepper();
         void setPosicionArticulares(float, float, float, float);     
-        void goHome();
+        void goHome(); //Hace homing al robot
         void setFree(); //apaga los motores
-        void printMovidas();
+        void printMovidas(); //imprime coas
         void printGrados();
-        void RobotLogic();
+        void RobotLogic(); //Maquina de estados del robot
 };
 #endif
 

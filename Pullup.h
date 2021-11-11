@@ -32,7 +32,7 @@ class Pullup
         Encoder* misEncoders[3];
         Stepper* miStepper;
         //stepper
-        bool isMoving;
+        bool pidStatus;
     public:
         Pullup();
         void init();

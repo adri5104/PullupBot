@@ -22,7 +22,7 @@ Pullup::Pullup()
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
 
     miStepper = NULL;
-    isMoving = true;
+    pidStatus = true;
 }
 
 void Pullup::init()
@@ -66,7 +66,7 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
     misControles[A]->setPosicionGrados(gradosA);
     misControles[B]->setPosicionGrados(gradosB);
     misControles[C]->setPosicionGrados(gradosC);
-    isMoving = true;
+    pidStatus = true;
     //miStepper->setPosition(mmstepper);
 }
 
@@ -118,7 +118,7 @@ void Pullup::printMovidas()
 
 void Pullup::RobotLogic()
 {
-    if(isMoving == true)
+    if(pidStatus == true) //Enciende o apaga el PID
     {
     misControles[A]->control_logic();
     misControles[B]->control_logic();
@@ -152,5 +152,5 @@ void Pullup::setFree()
     misMotores[A]->setFree();
     misMotores[B]->setFree();
     misMotores[C]->setFree();
-    isMoving = false;
+    pidStatus = false;
 }

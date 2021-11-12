@@ -5,7 +5,7 @@ Stepper::Stepper() {
 
     is_moving = false;
     px=0;
-
+    disableStepper();
 }
 
 void Stepper::setPosition(float npx) {
@@ -52,16 +52,22 @@ void Stepper::move() {
 }
 
 float Stepper::getPosition(){
+
     if(digitalRead(dir_pin)==HIGH){
-      return (previa+step_count);
+        return (previa+step_count);
     }
-    else{ return(previa-step_count);}
+
+    else{ 
+        return(previa-step_count);
+    }
 }
 
 void Stepper::enableStepper(){
+
     digitalWrite(reset,HIGH);
 }
 
 void Stepper::disableStepper(){
+    
     digitalWrite(reset,LOW);
 }

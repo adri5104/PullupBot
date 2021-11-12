@@ -1,4 +1,5 @@
 #include "Stepper.h"
+#include "Parametros.h"
 #include <arduino.h>
 
 Stepper::Stepper(int stp, int dir, int res) {

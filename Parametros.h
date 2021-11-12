@@ -48,6 +48,12 @@
 #define KI_C 0
 #define KD_C 0
 
+// Stepper
+#define STEPS_PER_MM 5
+#define PIN_STEP 40
+#define PIN_DIR 20
+#define RESET 10
+
 // ------- FINALES DE CARRERA -------
 #define PIN_ENDSTOPA 42
 #define PIN_ENDSTOPB 44

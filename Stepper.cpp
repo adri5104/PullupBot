@@ -1,11 +1,22 @@
 #include "Stepper.h"
 #include <arduino.h>
 
-Stepper::Stepper() {
+Stepper::Stepper(int stp, int dir, int res) {
 
+    step_pin=stp;
+    dir_pin=dir;
+    reset=res;
     is_moving = false;
     px=0;
     disableStepper();
+}
+
+void Stepper::Sinit(){
+
+    pinMode(step_pin,OUTPUT);
+    pinMode(dir_pin,OUTPUT);
+    pinMode(reset,OUTPUT);
+
 }
 
 void Stepper::setPosition(float npx) {
@@ -68,6 +79,7 @@ void Stepper::enableStepper(){
 }
 
 void Stepper::disableStepper(){
-    
+
     digitalWrite(reset,LOW);
 }
+

@@ -21,7 +21,7 @@ Pullup::Pullup()
     misControles[B] = new Controlposicion(misMotores[B], misEncoders[B]);
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
 
-    miStepper = NULL;
+    miStepper = new Stepper(PIN_STEP,PIN_DIR,RESET);
     pidStatus = true;
 }
 
@@ -38,6 +38,8 @@ void Pullup::init()
     misEndstops[A]->init();
     misEndstops[B]->init();
     misEndstops[C]->init();
+
+    miStepper->Sinit();
 }
 
 Motor* Pullup::getMotor(int quemotor)
@@ -66,7 +68,7 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
     misControles[B]->setPosicionGrados(gradosB);
     misControles[C]->setPosicionGrados(gradosC);
     pidStatus = true;
-    //miStepper->setPosition(mmstepper);
+    miStepper->prepareMove(mmstepper);
 }
 
 void Pullup::goHome()
@@ -131,6 +133,7 @@ void Pullup::RobotLogic()
     if(misEndstops[B]->pressed()) misMotores[B]->setFree();
     if(misEndstops[C]->pressed()) misMotores[C]->setFree(); 
     */
+    miStepper->move();
 }
 
 void Pullup::printGrados()
@@ -144,6 +147,9 @@ void Pullup::printGrados()
    Serial.print("Grados: ");
    Serial.print(misEncoders[C]->getPosicionGrados());
    Serial.print(", ");
+   Serial.print("MM:");
+   Serial.print(miStepper->getPosition());
+
 }
 
 void Pullup::setFree()
@@ -152,4 +158,5 @@ void Pullup::setFree()
     misMotores[B]->setFree();
     misMotores[C]->setFree();
     pidStatus = false;
+    miStepper->disableStepper();
 }

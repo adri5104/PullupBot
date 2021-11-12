@@ -1,6 +1,7 @@
 #define STEPS_PER_MM 5
 #define step_pin 40
 #define dir_pin 20
+#define reset 10
 
 class Stepper {
 
@@ -22,5 +23,7 @@ public:
     float getPosition(); //la que envia la posicion en cada instante a matlab
     void prepareMove(float newx);
     void move();
+    void enableStepper();
+    void disableStepper();
 
 };

@@ -27,6 +27,8 @@ void Stepper::prepareMove(float newx) {
         setPosition(newx);
     }
 
+    if(is_moving) enableStepper();
+
 }
 
 
@@ -45,6 +47,8 @@ void Stepper::move() {
 
     is_moving = !(step_count >= maxsteps);
 
+    if(!is_moving) disableStepper();
+
 }
 
 float Stepper::getPosition(){
@@ -52,4 +56,12 @@ float Stepper::getPosition(){
       return (previa+step_count);
     }
     else{ return(previa-step_count);}
+}
+
+void Stepper::enableStepper(){
+    digitalWrite(reset,HIGH);
+}
+
+void Stepper::disableStepper(){
+    digitalWrite(reset,LOW);
 }

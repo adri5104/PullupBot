@@ -22,7 +22,7 @@ y devolver la posicion del robot (cinematica directa)
 #include "Stepper.h"
 #include "Endstop.h"
 #include <Arduino.h>
-class Pullup
+class Pullup 
 {
     private:
         Endstop* misEndstops[3];
@@ -40,6 +40,7 @@ class Pullup
         Encoder* getEncoder(int);
         Controlposicion* getControlposicion(int);
         Stepper* getStepper();
+        Endstop* getEndstop(int);
         void setPosicionArticulares(float, float, float, float);     
         void goHome(); //Hace homing al robot
         void setFree(); //apaga los motores

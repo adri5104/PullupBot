@@ -149,7 +149,6 @@ void Pullup::printGrados()
    Serial.print(", ");
    Serial.print("MM:");
    Serial.print(miStepper->getPosition());
-
 }
 
 void Pullup::setFree()
@@ -159,4 +158,9 @@ void Pullup::setFree()
     misMotores[C]->setFree();
     pidStatus = false;
     miStepper->disableStepper();
+}
+
+Endstop* Pullup::getEndstop(int queendstop)
+{
+    return misEndstops[queendstop];
 }

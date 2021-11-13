@@ -29,7 +29,7 @@
 #define PIN_MOTORA_IN2 41
 #define PIN_MOTORA_PWM 3
 #define KP_A 2
-#define KI_A 0
+#define KI_A 0.5
 #define KD_A 0
 
 // Motor A
@@ -37,7 +37,7 @@
 #define PIN_MOTORB_IN2 35
 #define PIN_MOTORB_PWM 4
 #define KP_B 2
-#define KI_B 0
+#define KI_B 0.5
 #define KD_B 0
 
 // Motor c
@@ -45,7 +45,7 @@
 #define PIN_MOTORC_IN2 43
 #define PIN_MOTORC_PWM 5
 #define KP_C 2
-#define KI_C 0
+#define KI_C 0.5
 #define KD_C 0
 
 // Stepper
@@ -61,6 +61,7 @@
 
 // ------- DEBUGGING -------
 #define DEBUGGING_
+#define PRUEBAS_FINALES_DE_CARRERA
 
 //Otras movidas
 #define A 0

@@ -85,7 +85,7 @@ void loop()
   
   if(op = 1) myPullup.setPosicionArticulares(a,b,c,0);
   
-  if(op = 0) myPullup.setFree();
+  if(op = 0) myPullup.goHome();
   
    //Para probar los motores
   //myPullup.getMotor(C)->setFwd();
@@ -95,8 +95,16 @@ void loop()
   //myPullup.getMotor(B)->setFwd();
   //myPullup.getMotor(B)->setPWM(255);
   
+
+  //Holi
   #ifdef DEBUGGING_
   myPullup.printMovidas();
   myPullup.printGrados();
+  #endif
+
+  #ifdef PRUEBAS_FINALES_DE_CARRERA
+  if(myPullup.getEndstop(A)->pressed()) Serial.println("ËNDSTOP_A PULSADO");
+  if(myPullup.getEndstop(B)->pressed()) Serial.println("ËNDSTOP_B PULSADO");
+  if(myPullup.getEndstop(C)->pressed()) Serial.println("ËNDSTOP_C PULSADO");
   #endif
 }

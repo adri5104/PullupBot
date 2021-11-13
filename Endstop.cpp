@@ -14,8 +14,8 @@ void Endstop::init()
 
 bool Endstop::pressed()
 {
-	if (digitalRead(mypin)) return true;
-	else return false;
+	if (digitalRead(mypin)) return false;
+	else return true;
 }
 
 #endif

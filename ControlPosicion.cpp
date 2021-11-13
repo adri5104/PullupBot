@@ -59,7 +59,7 @@ void Controlposicion::control_logic()
 
         pwr = fabs(u);
         
-        if(pwr > 155) pwr = 155; // velocidad maxima
+        if(pwr > 255) pwr = 255; // velocidad maxima
 
         if(u < 0)
         {

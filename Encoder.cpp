@@ -10,8 +10,8 @@ Encoder::Encoder(int canal_A, int canal_B, float grados_por_tic_)
 
 void Encoder::init()
 {
-    pinMode(pin_canal_A, INPUT);
-    pinMode(pin_canal_B, INPUT);
+    pinMode(pin_canal_A, INPUT_PULLUP);
+    pinMode(pin_canal_B, INPUT_PULLUP);
 }
 
 void Encoder::actualizar_posicion()

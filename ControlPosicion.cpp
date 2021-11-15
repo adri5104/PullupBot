@@ -59,7 +59,7 @@ void Controlposicion::control_logic()
 
         pwr = fabs(u);
         
-        if(pwr > 255) pwr = 255; // velocidad maxima
+        if(pwr > MAX_PID_PWM) pwr = MAX_PID_PWM; // velocidad maxima
 
         if(u < 0)
         {

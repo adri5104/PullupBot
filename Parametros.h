@@ -5,10 +5,15 @@
 #include <Arduino.h>
 #include <stdio.h>
 
-#define GRADOS_POR_TIC 5.85
+#define GRADOS_POR_TIC_A 5.85
+#define GRADOS_POR_TIC_B 5.85
+#define GRADOS_POR_TIC_C 5.85
 #define PULSOS_A_GRADOS(x) (x)/5.85
 #define GRADOS_A_PULSOS(x) (x)*5.85
 
+// ------- LIMITES -------
+#define MAX_PID_PWM 255
+#define HOMING_PWM 55
 
 // ------- ENCODERS -------
 #define PIN_MOTORA_CANALA 24

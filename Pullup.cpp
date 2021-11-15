@@ -22,7 +22,9 @@ Pullup::Pullup()
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
 
     miStepper = new Stepper(PIN_STEP,PIN_DIR,RESET);
-    pidStatus = true;
+    pidStatus = false;
+    homing = false;
+    setfree = true;
 }
 
 void Pullup::init()
@@ -68,11 +70,42 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
     misControles[B]->setPosicionGrados(gradosB);
     misControles[C]->setPosicionGrados(gradosC);
     pidStatus = true;
+    setfree = false;
+    homing = false;
+    miStepper->prepareMove(mmstepper);
+}
+
+void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float mmstepper)
+{
+    misControles[A]->setPosicionTics(ticsA);
+    misControles[B]->setPosicionTics(ticsB);
+    misControles[C]->setPosicionTics(ticsC);
+    pidStatus = true;
+    setfree = false;
+    homing = false;
     miStepper->prepareMove(mmstepper);
 }
 
 void Pullup::goHome()
 {
+    //Si todos los endstop se pulsan
+    if((misEndstops[C]->pressed() && (misEndstops[A]->pressed()) && (misEndstops[B]->pressed())))
+    {
+        misControles[A]->setPosicionTics(0);
+        misControles[B]->setPosicionTics(0);
+        misControles[C]->setPosicionTics(0);
+        homing = false;
+        setfree = true;
+        pidStatus = false;
+        return;
+    }
+    else
+    {
+        pidStatus = false;
+        homing = true;
+        setfree = false;
+    }
+
     if(misEndstops[A]->pressed())
     {
         misMotores[A]->setFree();
@@ -80,7 +113,7 @@ void Pullup::goHome()
     }
     else
     {
-        misMotores[A]->setPWM(55);
+        misMotores[A]->setPWM(HOMING_PWM);
         misMotores[A]->setBack();
     }
 
@@ -91,7 +124,7 @@ void Pullup::goHome()
     }
     else
     {
-        misMotores[B]->setPWM(55);
+        misMotores[B]->setPWM(HOMING_PWM);
         misMotores[B]->setBack();
     }
 
@@ -102,7 +135,7 @@ void Pullup::goHome()
     }
     else
     {
-        misMotores[C]->setPWM(55);
+        misMotores[C]->setPWM(HOMING_PWM);
         misMotores[C]->setBack();
     }
 }
@@ -125,6 +158,16 @@ void Pullup::RobotLogic()
     misControles[B]->control_logic();
     misControles[C]->control_logic();
     };
+
+    if(homing == true)
+    {
+        this -> goHome();
+    }
+
+    if(setfree == true)
+    {
+        this -> setFree();
+    }
 
     if((misEndstops[C]->pressed() && (misEndstops[A]->pressed()) && (misEndstops[B]->pressed()))) digitalWrite(LED_BUILTIN, HIGH);
     else digitalWrite(LED_BUILTIN, 0x0);
@@ -153,10 +196,12 @@ void Pullup::printGrados()
 
 void Pullup::setFree()
 {
+    setfree = true;
+    pidStatus = false;
+    homing = false;
     misMotores[A]->setFree();
     misMotores[B]->setFree();
     misMotores[C]->setFree();
-    pidStatus = false;
     miStepper->disableStepper();
 }
 

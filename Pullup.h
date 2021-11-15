@@ -33,15 +33,20 @@ class Pullup
         Stepper* miStepper;
         //stepper
         bool pidStatus;
+        bool homing;
+        bool setfree;
     public:
         Pullup();
         void init();
+
         Motor* getMotor(int);
         Encoder* getEncoder(int);
         Controlposicion* getControlposicion(int);
         Stepper* getStepper();
         Endstop* getEndstop(int);
+        
         void setPosicionArticulares(float, float, float, float);     
+        void setPosicionArticulares_tics(int,int,int,float);
         void goHome(); //Hace homing al robot
         void setFree(); //apaga los motores
         void printMovidas(); //imprime coas

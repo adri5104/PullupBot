@@ -21,7 +21,7 @@ Pullup::Pullup()
     misControles[B] = new Controlposicion(misMotores[B], misEncoders[B]);
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
 
-    miStepper = new Stepper(PIN_STEP,PIN_DIR,RESET);
+    miStepper = new Stepper(PIN_STEP,PIN_DIR,RESET,SLEEP);
     pidStatus = false;
     homing = false;
     setfree = true;

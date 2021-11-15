@@ -55,9 +55,11 @@
 
 // Stepper
 #define STEPS_PER_MM 5
-#define PIN_STEP 40
-#define PIN_DIR 20
-#define RESET 10
+#define PIN_STEP 6
+#define PIN_DIR 53
+#define RESET 50
+#define SLEEP 48
+#define millisbetweensteps 0.05
 
 // ------- FINALES DE CARRERA -------
 #define PIN_ENDSTOPA 42

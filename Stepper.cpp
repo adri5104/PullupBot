@@ -2,14 +2,15 @@
 #include "Parametros.h"
 #include <arduino.h>
 
-Stepper::Stepper(int stp, int dir, int res) {
+Stepper::Stepper(int stp, int dir, int res, int slp) {
 
     step_pin=stp;
     dir_pin=dir;
     reset=res;
+    sleep=slp;
     is_moving = false;
     px=0;
-    disableStepper();
+   // disableStepper();
 }
 
 void Stepper::Sinit(){
@@ -17,6 +18,7 @@ void Stepper::Sinit(){
     pinMode(step_pin,OUTPUT);
     pinMode(dir_pin,OUTPUT);
     pinMode(reset,OUTPUT);
+    pinMode(sleep,OUTPUT);
 
 }
 
@@ -39,7 +41,7 @@ void Stepper::prepareMove(float newx) {
         setPosition(newx);
     }
 
-    if(is_moving) enableStepper();
+    //if(is_moving) enableStepper();
 
 }
 
@@ -59,22 +61,22 @@ void Stepper::move() {
 
     is_moving = !(step_count >= maxsteps);
 
-    if(!is_moving) disableStepper();
+    //if(!is_moving) disableStepper();
 
 }
 
 float Stepper::getPosition(){
 
     if(digitalRead(dir_pin)==HIGH){
-        return (previa+step_count);
+        return (previa+(step_count/STEPS_PER_MM));
     }
 
     else{ 
-        return(previa-step_count);
+        return(previa-(step_count/STEPS_PER_MM));
     }
 }
 
-void Stepper::enableStepper(){
+/*void Stepper::enableStepper(){
 
     digitalWrite(reset,HIGH);
 }
@@ -83,4 +85,4 @@ void Stepper::disableStepper(){
 
     digitalWrite(reset,LOW);
 }
-
+*/

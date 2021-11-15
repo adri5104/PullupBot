@@ -42,6 +42,8 @@ void setup() {
   pinMode(PIN_STBY_2, OUTPUT);
   digitalWrite(PIN_STBY_1, HIGH);
   digitalWrite(PIN_STBY_2, HIGH);
+  digitalWrite(RESET,LOW);
+  digitalWrite(SLEEP,LOW);
 
   //Interrupciones de los encoders
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);

@@ -238,13 +238,14 @@ Endstop* Pullup::getEndstop(int queendstop)
 
 void Pullup::SerialPrintPosicionTics()
 {
-    Serial.print(misEncoders[A]->getTics());
+    Serial.print(misEncoders[A]->getTics());  
     Serial.print(" ");
     Serial.print(misEncoders[B]->getTics());
     Serial.print(" ");
     Serial.print(misEncoders[C]->getTics());
     Serial.print(" ");
-    Serial.println(misEncoders[A]->getTics());
+    Serial.print(misEncoders[A]->getTics());
+    Serial.write('\n');
     
 }
 

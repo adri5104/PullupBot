@@ -12,7 +12,7 @@
 #define GRADOS_A_PULSOS(x) (x)*5.85
 
 // ------- LIMITES -------
-#define MAX_PID_PWM 255
+#define MAX_PID_PWM 175
 #define HOMING_PWM  175
 #define GRAVITY_PWM 150
 
@@ -34,9 +34,9 @@
 #define PIN_MOTORA_IN1 39
 #define PIN_MOTORA_IN2 41
 #define PIN_MOTORA_PWM 3
-#define KP_A 10
+#define KP_A 1
 #define KI_A 0
-#define KD_A 5
+#define KD_A 0
 
 // Motor A
 #define PIN_MOTORB_IN1 33

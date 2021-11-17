@@ -54,7 +54,7 @@ void Controlposicion::control_logic()
         float integral_error = error_acumulado;
 
         //senal de control
-        float u = kp*error + kd*derivada_error + ki*integral_error;
+        float u = kp*error + kd*derivada_error + ki*integral_error + 50;
         //map(pwr,0,255,60,255);
         pwr = fabs(u);
         

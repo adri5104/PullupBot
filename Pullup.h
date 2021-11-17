@@ -56,6 +56,7 @@ class Pullup
         void RobotLogic(); //Maquina de estados del robot
         void SerialPrintPosicionTics();
         void SerialPrintErrores();
+        void HomingAMano();
 };
 #endif
 

@@ -91,7 +91,7 @@ void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float 
 
 void Pullup::goHome()
 {
-    Serial.println("HOMING");
+    //Serial.println("HOMING");
     #ifdef DEBUGGING_
     //1erial.println("HOMING");
     #endif
@@ -104,7 +104,7 @@ void Pullup::goHome()
         pidStatus = true;
         misControles[A]->setPosicionGrados(0);
         misControles[B]->setPosicionGrados(0);
-        misControles[C]->setPosicionGrados(45);
+        misControles[C]->setPosicionGrados(0);
         
         return;
     }
@@ -257,4 +257,12 @@ void Pullup::SerialPrintErrores()
     Serial.print(misControles[C]->getError());
     Serial.print(" ");
     Serial.println(misControles[A]->getError());
+}
+
+void Pullup::HomingAMano()
+{
+    misEncoders[A]->resetPosicion();
+    misEncoders[B]->resetPosicion();
+    misEncoders[C]->resetPosicion();
+    this->setPosicionArticulares(0,0,0,0);
 }

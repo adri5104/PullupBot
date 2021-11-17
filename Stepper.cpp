@@ -10,6 +10,8 @@ Stepper::Stepper(int stp, int dir, int res, int slp) {
     sleep=slp;
     is_moving = false;
     px=0;
+    previa = 0;
+    step_count = 0;
    // disableStepper();
 }
 

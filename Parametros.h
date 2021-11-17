@@ -13,7 +13,7 @@
 
 // ------- LIMITES -------
 #define MAX_PID_PWM 255
-#define HOMING_PWM 200
+#define HOMING_PWM  175
 #define GRAVITY_PWM 150
 
 // ------- ENCODERS -------
@@ -68,9 +68,9 @@
 #define PIN_ENDSTOPC 46
 
 // ------- DEBUGGING -------
-#define DEBUGGING_
+//#define DEBUGGING_
 //#define PRUEBAS_FINALES_DE_CARRERA
-#define PRINT_SERIAL
+//#define PRINT_SERIAL
 
 //Otras movidas
 #define A 0

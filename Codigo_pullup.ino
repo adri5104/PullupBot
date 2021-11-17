@@ -87,7 +87,7 @@ void loop()
   switch(op)
   {
     case 0:
-      myPullup.setPosicionArticulares_tics(a,b,c,d);
+      myPullup.setPosicionArticulares(a,b,c,d);
     break;
 
     case 1: 
@@ -106,13 +106,16 @@ void loop()
     case 4:
       myPullup.SerialPrintErrores();
     break;
+
+    default:
+    break;
   }
-  
+  op = 7;
+
   myPullup.RobotLogic();
 
   //Si no funciona a la primera, probar a descomentar la siguiente linea
-  // op = 0;
-
+  
   #ifdef PRINT_SERIAL
   Serial.print(op);
   Serial.print(",");
@@ -125,7 +128,7 @@ void loop()
   Serial.println(d);
   #endif
   #ifdef DEBUGGING_
- // myPullup.printMovidas();
+ //myPullup.printMovidas();
   //myPullup.printGrados();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA

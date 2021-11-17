@@ -13,7 +13,8 @@
 
 // ------- LIMITES -------
 #define MAX_PID_PWM 255
-#define HOMING_PWM 55
+#define HOMING_PWM 200
+#define GRAVITY_PWM 150
 
 // ------- ENCODERS -------
 #define PIN_MOTORA_CANALA 24
@@ -33,24 +34,24 @@
 #define PIN_MOTORA_IN1 39
 #define PIN_MOTORA_IN2 41
 #define PIN_MOTORA_PWM 3
-#define KP_A 2
-#define KI_A 0.5
-#define KD_A 0
+#define KP_A 10
+#define KI_A 0
+#define KD_A 5
 
 // Motor A
 #define PIN_MOTORB_IN1 33
 #define PIN_MOTORB_IN2 35
 #define PIN_MOTORB_PWM 4
-#define KP_B 2
-#define KI_B 0.5
+#define KP_B 1
+#define KI_B 0
 #define KD_B 0
 
 // Motor c
 #define PIN_MOTORC_IN1 45
 #define PIN_MOTORC_IN2 43
 #define PIN_MOTORC_PWM 5
-#define KP_C 2
-#define KI_C 0.5
+#define KP_C 1
+#define KI_C 0
 #define KD_C 0
 
 // Stepper
@@ -68,7 +69,8 @@
 
 // ------- DEBUGGING -------
 #define DEBUGGING_
-#define PRUEBAS_FINALES_DE_CARRERA
+//#define PRUEBAS_FINALES_DE_CARRERA
+//#define PRINT_SERIAL
 
 //Otras movidas
 #define A 0

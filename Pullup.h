@@ -35,6 +35,7 @@ class Pullup
         bool pidStatus;
         bool homing;
         bool setfree;
+        bool setlock;
     public:
         Pullup();
         void init();
@@ -48,7 +49,8 @@ class Pullup
         void setPosicionArticulares(float, float, float, float);     
         void setPosicionArticulares_tics(int,int,int,float);
         void goHome(); //Hace homing al robot
-        void setFree(); //apaga los motores
+        void setFree();
+        void setLock(); //apaga los motores
         void printMovidas(); //imprime coas
         void printGrados();
         void RobotLogic(); //Maquina de estados del robot

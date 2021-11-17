@@ -13,7 +13,7 @@ Controlposicion::Controlposicion(Motor* Motor, Encoder* Encoder)
     int referencia_tics = 0;
     error_acumulado = 0;
     error_previo = 0;
-    motorApagado = true;
+    //motorApagado = true;
 }
 
 void Controlposicion::setGains(int kp_, int ki_, int kd_)
@@ -46,17 +46,16 @@ void Controlposicion::control_logic()
         float deltaT = ((float)(micros()-tiempo_previo)) / 1.0e6; //intervalo de tiempo
         int error = (myEncoder->getTics()) - referencia_tics;
         error_acumulado+=(error*deltaT);
-        error_previo = error;
 
         //derivada del error
-        float derivada_error = error_acumulado;
+        float derivada_error = (error - error_previo)/ deltaT;
 
         //integral del error
-        float integral_error = error;
+        float integral_error = error_acumulado;
 
         //senal de control
         float u = kp*error + kd*derivada_error + ki*integral_error;
-
+        //map(pwr,0,255,60,255);
         pwr = fabs(u);
         
         if(pwr > MAX_PID_PWM) pwr = MAX_PID_PWM; // velocidad maxima
@@ -71,4 +70,8 @@ void Controlposicion::control_logic()
             myMotor->setBack();
             myMotor->setPWM(pwr);
         }
+
+        
+
+        error_previo = error;
 }

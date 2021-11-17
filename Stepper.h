@@ -1,4 +1,7 @@
 
+
+#ifndef STEPPER_
+#define STEPPER_
 class Stepper {
 
 public:
@@ -27,3 +30,6 @@ private:
     int reset;
     int sleep;
 };
+
+
+#endif

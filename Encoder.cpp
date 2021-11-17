@@ -1,4 +1,5 @@
 #include "Encoder.h"
+#include "Parametros.h"
 
 Encoder::Encoder(int canal_A, int canal_B, float grados_por_tic_)
 {
@@ -14,21 +15,36 @@ void Encoder::init()
     pinMode(pin_canal_B, INPUT_PULLUP);
 }
 
-void Encoder::actualizar_posicion()
+void Encoder::actualizar_posicionA()
 {
-    if(digitalRead(pin_canal_A) == HIGH)
+    if(digitalRead(pin_canal_A) == digitalRead(pin_canal_B))
     {
-        if(digitalRead(pin_canal_B) == LOW)
+        
             posicion_tics++;
-        else
-            posicion_tics--;
+       
     }
     else
     {
-        if(digitalRead(pin_canal_B) == LOW)
+      
             posicion_tics--;
-        else
+        
+    }
+
+}
+
+void Encoder::actualizar_posicionB()
+{
+    if(digitalRead(pin_canal_A) == digitalRead(pin_canal_B))
+    {
+        
             posicion_tics++;
+       
+    }
+    else
+    {
+      
+            posicion_tics--;
+        
     }
 
 }
@@ -46,4 +62,9 @@ int Encoder::getTics()
 void Encoder::resetPosicion()
 {
     posicion_grados = 0;
+}
+
+void Encoder::setPosicionGrados(int grados)
+{
+    posicion_tics = GRADOS_A_PULSOS(grados);
 }

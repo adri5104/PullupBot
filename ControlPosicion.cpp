@@ -71,7 +71,7 @@ void Controlposicion::control_logic()
             myMotor->setPWM(pwr);
         }
 
-        
+
 
         error_previo = error;
 }

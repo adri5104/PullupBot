@@ -21,17 +21,29 @@ Controlposicion* Control_C= new Controlposicion(Motor_C, Encoder_C);
 */
 //Funciones para manejar las interrupciones de los encoders. No se puede 
 //llamar a un metodo de una clase desde una interrupcion.
-void handler_encoderA()
+void handler_encoderAA()
 {
-  myPullup.getEncoder(A)->actualizar_posicion();  
+  myPullup.getEncoder(A)->actualizar_posicionA();
 }
-void handler_encoderB()
-{
-  myPullup.getEncoder(B)->actualizar_posicion();
+void handler_encoderAB()
+{ 
+  myPullup.getEncoder(A)->actualizar_posicionB();   
 }
-void handler_encoderC()
+void handler_encoderBA()
 {
-  myPullup.getEncoder(C)->actualizar_posicion();
+  myPullup.getEncoder(B)->actualizar_posicionA();
+}
+void handler_encoderBB()
+{ 
+  myPullup.getEncoder(B)->actualizar_posicionB();
+}
+void handler_encoderCA()
+{
+  myPullup.getEncoder(C)->actualizar_posicionA();
+}
+void handler_encoderCB()
+{ 
+  myPullup.getEncoder(C)->actualizar_posicionB();
 }
 //Setup. Movidas de cuando se hace reset
 void setup() {
@@ -46,9 +58,14 @@ void setup() {
   digitalWrite(SLEEP,LOW);
 
   //Interrupciones de los encoders
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderAA, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALB), handler_encoderAB, CHANGE); //aNTONIO
+
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderBA, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALB), handler_encoderBB, CHANGE); //Antonio
+
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderCA, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALB), handler_encoderCB, CHANGE); //Antonio
   Serial.begin(9600);
 
   //Se ponen los parametros de los pids
@@ -72,41 +89,55 @@ float a,b,c;
 //Lo que se repite
 void loop() 
 {
+
+
+  
   //Lectura del serial
   while(Serial.available())
   {
     op = Serial.parseInt();
-    a = Serial.parseFloat();
-    b = Serial.parseFloat();
-    c = Serial.parseFloat();
+    a = Serial.parseInt();
+    b = Serial.parseInt();
+    c = Serial.parseInt();
     if (Serial.read() == '\n') break;
   }
 
   //Cosas que hace el robot.
   myPullup.RobotLogic();
   
-  if(op = 1) myPullup.setPosicionArticulares(a,b,c,0);
+  //if(op = 1) myPullup.setPosicionArticulares(a,b,c,0);
+  myPullup.setPosicionArticulares(a,b,c,0);
   
-  if(op = 0) myPullup.goHome();
   
-   //Para probar los motores
-  //myPullup.getMotor(C)->setFwd();
-  //myPullup.getMotor(C)->setPWM(255);
-  //myPullup.getMotor(A)->setFwd();
-  //myPullup.getMotor(A)->setPWM(255); 
-  //myPullup.getMotor(B)->setFwd();
-  //myPullup.getMotor(B)->setPWM(255);
-  
-
-  //Holi
-  #ifdef DEBUGGING_
-  myPullup.printMovidas();
-  myPullup.printGrados();
+  #ifdef PRINT_SERIAL
+  Serial.print(op);
+  Serial.print(",");
+  Serial.print(a);
+  Serial.print(",");
+  Serial.print(b);
+  Serial.print(",");
+  Serial.println(c);
   #endif
-
+  #ifdef DEBUGGING_
+ // myPullup.printMovidas();
+  //myPullup.printGrados();
+  #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A)->pressed()) Serial.println("ËNDSTOP_A PULSADO");
   if(myPullup.getEndstop(B)->pressed()) Serial.println("ËNDSTOP_B PULSADO");
   if(myPullup.getEndstop(C)->pressed()) Serial.println("ËNDSTOP_C PULSADO");
   #endif
+  
+
+//#define SERIAL_PLOTTER
+#ifdef SERIAL_PLOTTER
+ int a = digitalRead(PIN_MOTORB_CANALA);
+ int b = digitalRead(PIN_MOTORB_CANALB);
+ Serial.print(a*5);
+ Serial.print(" ");
+ Serial.print(b*5);
+ Serial.println();
+}
+#endif
+
 }

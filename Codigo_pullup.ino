@@ -21,29 +21,17 @@ Controlposicion* Control_C= new Controlposicion(Motor_C, Encoder_C);
 */
 //Funciones para manejar las interrupciones de los encoders. No se puede 
 //llamar a un metodo de una clase desde una interrupcion.
-void handler_encoderAA()
+void handler_encoderA()
 {
-  myPullup.getEncoder(A)->actualizar_posicionA();
+  myPullup.getEncoder(A)->actualizar_posicion();  
 }
-void handler_encoderAB()
-{ 
-  myPullup.getEncoder(A)->actualizar_posicionB();   
-}
-void handler_encoderBA()
+void handler_encoderB()
 {
-  myPullup.getEncoder(B)->actualizar_posicionA();
+  myPullup.getEncoder(B)->actualizar_posicion();
 }
-void handler_encoderBB()
-{ 
-  myPullup.getEncoder(B)->actualizar_posicionB();
-}
-void handler_encoderCA()
+void handler_encoderC()
 {
-  myPullup.getEncoder(C)->actualizar_posicionA();
-}
-void handler_encoderCB()
-{ 
-  myPullup.getEncoder(C)->actualizar_posicionB();
+  myPullup.getEncoder(C)->actualizar_posicion();
 }
 //Setup. Movidas de cuando se hace reset
 void setup() {
@@ -58,14 +46,9 @@ void setup() {
   digitalWrite(SLEEP,LOW);
 
   //Interrupciones de los encoders
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderAA, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALB), handler_encoderAB, CHANGE); //aNTONIO
-
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderBA, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALB), handler_encoderBB, CHANGE); //Antonio
-
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderCA, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALB), handler_encoderCB, CHANGE); //Antonio
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
   Serial.begin(9600);
 
   //Se ponen los parametros de los pids
@@ -129,7 +112,7 @@ void loop()
   #endif
   
 
-//#define SERIAL_PLOTTER
+#define SERIAL_PLOTTER
 #ifdef SERIAL_PLOTTER
  int a = digitalRead(PIN_MOTORB_CANALA);
  int b = digitalRead(PIN_MOTORB_CANALB);
@@ -139,5 +122,3 @@ void loop()
  Serial.println();
 }
 #endif
-
-}

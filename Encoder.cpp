@@ -15,39 +15,25 @@ void Encoder::init()
     pinMode(pin_canal_B, INPUT_PULLUP);
 }
 
-void Encoder::actualizar_posicionA()
+void Encoder::actualizar_posicion()
 {
-    if(digitalRead(pin_canal_A) == digitalRead(pin_canal_B))
+    if(digitalRead(pin_canal_A) == HIGH)
     {
-        
+        if(digitalRead(pin_canal_B) == LOW)
             posicion_tics++;
-       
+        else
+            posicion_tics--;
     }
     else
     {
-      
+        if(digitalRead(pin_canal_B) == LOW)
             posicion_tics--;
-        
+        else
+            posicion_tics++;
     }
 
 }
 
-void Encoder::actualizar_posicionB()
-{
-    if(digitalRead(pin_canal_A) == digitalRead(pin_canal_B))
-    {
-        
-            posicion_tics++;
-       
-    }
-    else
-    {
-      
-            posicion_tics--;
-        
-    }
-
-}
 
 float Encoder::getPosicionGrados()
 {

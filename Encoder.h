@@ -16,8 +16,7 @@ class Encoder
     public:
         Encoder(int, int, float);
         void init();
-        void actualizar_posicionA(); //Llamar con interrupcion en canal A.
-        void actualizar_posicionB(); //Llamar con interrupcion en canal A.
+        void actualizar_posicion(); //Llamar con interrupcion en canal A.
         float getPosicionGrados();
         int getTics();
         void resetPosicion(); //Pone la posicion a 0;

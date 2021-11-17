@@ -60,7 +60,7 @@
 #define PIN_DIR 53
 #define RESET 50
 #define SLEEP 48
-#define millisbetweensteps 0.05
+#define millisbetweensteps 0.005
 
 // ------- FINALES DE CARRERA -------
 #define PIN_ENDSTOPA 42
@@ -68,7 +68,7 @@
 #define PIN_ENDSTOPC 46
 
 // ------- DEBUGGING -------
-//#define DEBUGGING_
+#define DEBUGGING_
 //#define PRUEBAS_FINALES_DE_CARRERA
 #define PRINT_SERIAL
 

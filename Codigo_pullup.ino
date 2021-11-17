@@ -82,7 +82,7 @@ void loop()
     if (Serial.read() == '\n') break;
   }
   //Cosas que hace el robot.
-  myPullup.RobotLogic();
+  
 
   switch(op)
   {
@@ -108,6 +108,8 @@ void loop()
     break;
   }
   
+  myPullup.RobotLogic();
+
   //Si no funciona a la primera, probar a descomentar la siguiente linea
   // op = 0;
 

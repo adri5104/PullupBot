@@ -23,15 +23,15 @@ Controlposicion* Control_C= new Controlposicion(Motor_C, Encoder_C);
 //llamar a un metodo de una clase desde una interrupcion.
 void handler_encoderA()
 {
-  myPullup.getEncoder(A)->actualizar_posicionA();  
+  myPullup.getEncoder(A)->actualizar_posicion();  
 }
 void handler_encoderB()
 {
-  myPullup.getEncoder(B)->actualizar_posicionA();
+  myPullup.getEncoder(B)->actualizar_posicion();
 }
 void handler_encoderC()
 {
-  myPullup.getEncoder(C)->actualizar_posicionA();
+  myPullup.getEncoder(C)->actualizar_posicion();
 }
 //Setup. Movidas de cuando se hace reset
 void setup() {

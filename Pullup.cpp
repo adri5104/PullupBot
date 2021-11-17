@@ -235,3 +235,26 @@ Endstop* Pullup::getEndstop(int queendstop)
 {
     return misEndstops[queendstop];
 }
+
+void Pullup::SerialPrintPosicionTics()
+{
+    Serial.print(misEncoders[A]->getTics());
+    Serial.print(" ");
+    Serial.print(misEncoders[B]->getTics());
+    Serial.print(" ");
+    Serial.print(misEncoders[C]->getTics());
+    Serial.print(" ");
+    Serial.println(misEncoders[A]->getTics());
+    
+}
+
+void Pullup::SerialPrintErrores()
+{
+    Serial.print(misControles[A]->getError());
+    Serial.print(" ");
+    Serial.print(misControles[B]->getError());
+    Serial.print(" ");
+    Serial.print(misControles[C]->getError());
+    Serial.print(" ");
+    Serial.println(misControles[A]->getError());
+}

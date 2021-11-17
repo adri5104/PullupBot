@@ -54,6 +54,8 @@ class Pullup
         void printMovidas(); //imprime coas
         void printGrados();
         void RobotLogic(); //Maquina de estados del robot
+        void SerialPrintPosicionTics();
+        void SerialPrintErrores();
 };
 #endif
 

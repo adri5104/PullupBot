@@ -1,3 +1,6 @@
+
+
+
 /* En esta clase ya quedaran implementadas todas las clases anteriores
 Tendra como atributos 3 clases Motor con sus 3 encoders, sus 3 Endstop y sus 3
 controles de posicion. Tambien el stepper

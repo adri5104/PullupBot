@@ -1,5 +1,9 @@
-#include "DueTimer/DueTimer.h"
-#include "Pullup/Pullup.h"
+
+#include "Parametros.h"
+#include "Encoder.h"
+#include "ControlPosicion.h"
+#include "Pullup.h"
+#include "Motor.h"
 
 //Nuestro robot
 Pullup myPullup;
@@ -17,29 +21,21 @@ Controlposicion* Control_C= new Controlposicion(Motor_C, Encoder_C);
 */
 //Funciones para manejar las interrupciones de los encoders. No se puede 
 //llamar a un metodo de una clase desde una interrupcion.
-
-
-
 void handler_encoderA()
 {
-  myPullup.getEncoder(A).actualizar_posicion();  
+  myPullup.getEncoder(A)->actualizar_posicion();  
 }
 void handler_encoderB()
 {
-  myPullup.getEncoder(B).actualizar_posicion();
+  myPullup.getEncoder(B)->actualizar_posicion();
 }
 void handler_encoderC()
 {
-  myPullup.getEncoder(C).actualizar_posicion();
+  myPullup.getEncoder(C)->actualizar_posicion();
 }
-
-void timer_handler()
-{
-  myPullup.RobotLogic();
-}
-
 //Setup. Movidas de cuando se hace reset
 void setup() {
+
   //Se inicializan las movidas
   myPullup.init();
   pinMode(PIN_STBY_1, OUTPUT);
@@ -53,13 +49,12 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
-  Timer3.attachInterrupt(timer_handler).setPeriod(1000).start();
   Serial.begin(9600);
 
   //Se ponen los parametros de los pids
-  myPullup.getControlposicion(A).setGains(KP_A,KI_A,KD_A);
-  myPullup.getControlposicion(B).setGains(KP_B,KI_B,KD_B);
-  myPullup.getControlposicion(C).setGains(KP_B,KI_B,KD_B);
+  myPullup.getControlposicion(A)->setGains(KP_A,KI_A,KD_A);
+  myPullup.getControlposicion(B)->setGains(KP_B,KI_B,KD_B);
+  myPullup.getControlposicion(C)->setGains(KP_B,KI_B,KD_B);
   
   //Mensaje de bienvenida
   Serial.println("-----------------------------------");
@@ -69,7 +64,6 @@ void setup() {
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
 }
-
 
 //Variables leidas en el Serial
 int op,a,b,c,d;
@@ -88,6 +82,8 @@ void loop()
     if (Serial.read() == '\n') break;
   }
   //Cosas que hace el robot.
+  
+
   switch(op)
   {
     case 0:
@@ -116,8 +112,8 @@ void loop()
   }
   op = 7;
 //ab
-  
- 
+  myPullup.RobotLogic();
+
   //Si no funciona a la primera, probar a descomentar la siguiente linea
   
   #ifdef PRINT_SERIAL
@@ -132,8 +128,8 @@ void loop()
   Serial.println(d);
   #endif
   #ifdef DEBUGGING_
-  myPullup.printMovidas();
-  myPullup.printGrados();
+ //myPullup.printMovidas();
+  //myPullup.printGrados();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A)->pressed()) Serial.println("ËNDSTOP_A PULSADO");

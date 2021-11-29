@@ -5,14 +5,6 @@
 Pullup myPullup;
 
 
-
-#include "Parametros.h"
-#include "Encoder.h"
-#include "ControlPosicion.h"
-#include "Pullup.h"
-#include "Motor.h"
-
-
 void handler_encoderA()
 {
   myPullup.getEncoder(A).actualizar_posicion();  
@@ -24,6 +16,11 @@ void handler_encoderB()
 void handler_encoderC()
 {
   myPullup.getEncoder(C).actualizar_posicion();
+}
+
+void timer_handler()
+{
+  myPullup.RobotLogic();
 }
 //Setup. Movidas de cuando se hace reset
 void setup() {
@@ -41,6 +38,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
+  Timer4.start();
   Serial.begin(9600);
 
   //Se ponen los parametros de los pids

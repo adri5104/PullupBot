@@ -1,7 +1,17 @@
+
 #include "DueTimer\DueTimer.h"
 #include "Pullup.h"
 //Nuestro robot
 Pullup myPullup;
+
+
+
+#include "Parametros.h"
+#include "Encoder.h"
+#include "ControlPosicion.h"
+#include "Pullup.h"
+#include "Motor.h"
+
 
 void handler_encoderA()
 {
@@ -15,14 +25,9 @@ void handler_encoderC()
 {
   myPullup.getEncoder(C).actualizar_posicion();
 }
-
-void timer_handler()
-{
-  myPullup.RobotLogic();
-}
-
 //Setup. Movidas de cuando se hace reset
 void setup() {
+
   //Se inicializan las movidas
   myPullup.init();
   pinMode(PIN_STBY_1, OUTPUT);
@@ -36,7 +41,6 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
-  Timer3.attachInterrupt(timer_handler).setPeriod(1000).start();
   Serial.begin(9600);
 
   //Se ponen los parametros de los pids
@@ -70,6 +74,8 @@ void loop()
     if (Serial.read() == '\n') break;
   }
   //Cosas que hace el robot.
+  
+
   switch(op)
   {
     case 0:
@@ -89,8 +95,11 @@ void loop()
     break;
     default:
     break;
-  }op = 7;
- 
+  }
+  op = 7;
+//ab
+  myPullup.RobotLogic();
+
   //Si no funciona a la primera, probar a descomentar la siguiente linea
   #ifdef PRINT_SERIAL
   Serial.print(op);
@@ -104,8 +113,8 @@ void loop()
   Serial.println(d);
   #endif
   #ifdef DEBUGGING_
-  myPullup.printMovidas();
-  myPullup.printGrados();
+ //myPullup.printMovidas();
+  //myPullup.printGrados();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A).pressed()) Serial.println("ËNDSTOP_A PULSADO");

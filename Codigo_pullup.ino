@@ -98,7 +98,7 @@ void loop()
   }
   op = 7;
 //ab
-  myPullup.RobotLogic();
+  
 
   //Si no funciona a la primera, probar a descomentar la siguiente linea
   #ifdef PRINT_SERIAL

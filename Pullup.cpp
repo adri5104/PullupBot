@@ -44,24 +44,24 @@ void Pullup::init()
     miStepper->Sinit();
 }
 
-Motor* Pullup::getMotor(int quemotor)
+Motor& Pullup::getMotor(int quemotor)
 {
-    return misMotores[quemotor];
+    return *misMotores[quemotor];
 }
 
-Encoder* Pullup::getEncoder(int queencoder)
+Encoder& Pullup::getEncoder(int queencoder)
 {
-    return misEncoders[queencoder];
+    return *misEncoders[queencoder];
 }
 
-Controlposicion* Pullup::getControlposicion(int quecontrol)
+Controlposicion& Pullup::getControlposicion(int quecontrol)
 {
-    return misControles[quecontrol];
+    return *misControles[quecontrol];
 }
 
-Stepper* Pullup::getStepper()
+Stepper& Pullup::getStepper()
 {
-    return miStepper;
+    return *miStepper;
 }
 
 void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC, float mmstepper)
@@ -231,9 +231,9 @@ void Pullup::setFree()
     //miStepper->disableStepper();
 }
 
-Endstop* Pullup::getEndstop(int queendstop)
+Endstop& Pullup::getEndstop(int queendstop)
 {
-    return misEndstops[queendstop];
+    return *misEndstops[queendstop];
 }
 
 void Pullup::SerialPrintPosicionTics()

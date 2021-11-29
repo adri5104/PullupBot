@@ -68,9 +68,9 @@
 #define PIN_ENDSTOPC 46
 
 // ------- DEBUGGING -------
-//#define DEBUGGING_
-//#define PRUEBAS_FINALES_DE_CARRERA
-//#define PRINT_SERIAL
+#define DEBUGGING_
+#define PRUEBAS_FINALES_DE_CARRERA
+#define PRINT_SERIAL
 
 //Otras movidas
 #define A 0

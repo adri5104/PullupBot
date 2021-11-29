@@ -43,11 +43,11 @@ class Pullup
         Pullup();
         void init();
 
-        Motor* getMotor(int);
-        Encoder* getEncoder(int);
-        Controlposicion* getControlposicion(int);
-        Stepper* getStepper();
-        Endstop* getEndstop(int);
+        Motor& getMotor(int);
+        Encoder& getEncoder(int);
+        Controlposicion& getControlposicion(int);
+        Stepper& getStepper();
+        Endstop& getEndstop(int);
         
         void setPosicionArticulares(float, float, float, float);     
         void setPosicionArticulares_tics(int,int,int,float);

@@ -1,24 +1,7 @@
-#include "DueTimer/DueTimer.h"
-#include "Pullup/Pullup.h"
-
+#include "DueTimer\DueTimer.h"
+#include "Pullup.h"
 //Nuestro robot
 Pullup myPullup;
-//HOLIWIS
-/*
-Motor* Motor_A = new Motor(PIN_MOTORA_IN1, PIN_MOTORA_IN2, PIN_MOTORA_PWM);
-Encoder* Encoder_A = new Encoder(PIN_MOTORA_CANALA, PIN_MOTORA_CANALB, GRADOS_POR_TIC);
-Controlposicion* Control_A= new Controlposicion(Motor_A, Encoder_A); 
-Motor* Motor_B = new Motor(PIN_MOTORB_IN1, PIN_MOTORB_IN2, PIN_MOTORB_PWM);
-Encoder* Encoder_B = new Encoder(PIN_MOTORB_CANALA, PIN_MOTORB_CANALB, GRADOS_POR_TIC);
-Controlposicion* Control_B= new Controlposicion(Motor_B, Encoder_B); 
-Motor* Motor_C = new Motor(PIN_MOTORC_IN1, PIN_MOTORC_IN2, PIN_MOTORC_PWM);
-Encoder* Encoder_C = new Encoder(PIN_MOTORC_CANALA, PIN_MOTORC_CANALB, GRADOS_POR_TIC);
-Controlposicion* Control_C= new Controlposicion(Motor_C, Encoder_C); 
-*/
-//Funciones para manejar las interrupciones de los encoders. No se puede 
-//llamar a un metodo de una clase desde una interrupcion.
-
-
 
 void handler_encoderA()
 {
@@ -70,7 +53,6 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
 }
 
-
 //Variables leidas en el Serial
 int op,a,b,c,d;
 
@@ -93,33 +75,23 @@ void loop()
     case 0:
       myPullup.setPosicionArticulares(a,b,c,d);
     break;
-
     case 1: 
       myPullup.goHome();
     break;
-
     case 2:
       myPullup.SerialPrintPosicionTics();
-
     break;
-
     case 3:
       myPullup.setFree();
     break;
-
     case 4:
       myPullup.SerialPrintErrores();
     break;
-
     default:
     break;
-  }
-  op = 7;
-//ab
-  
+  }op = 7;
  
   //Si no funciona a la primera, probar a descomentar la siguiente linea
-  
   #ifdef PRINT_SERIAL
   Serial.print(op);
   Serial.print(",");
@@ -136,18 +108,17 @@ void loop()
   myPullup.printGrados();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
-  if(myPullup.getEndstop(A)->pressed()) Serial.println("ËNDSTOP_A PULSADO");
-  if(myPullup.getEndstop(B)->pressed()) Serial.println("ËNDSTOP_B PULSADO");
-  if(myPullup.getEndstop(C)->pressed()) Serial.println("ËNDSTOP_C PULSADO");
+  if(myPullup.getEndstop(A).pressed()) Serial.println("ËNDSTOP_A PULSADO");
+  if(myPullup.getEndstop(B).pressed()) Serial.println("ËNDSTOP_B PULSADO");
+  if(myPullup.getEndstop(C).pressed()) Serial.println("ËNDSTOP_C PULSADO");
   #endif
-  
-//#define SERIAL_PLOTTER
-#ifdef SERIAL_PLOTTER
- int a = digitalRead(PIN_MOTORB_CANALA);
- int b = digitalRead(PIN_MOTORB_CANALB);
- Serial.print(a*5);
- Serial.print(" ");
- Serial.print(b*5);
- Serial.println();
-#endif
-}
+  //#define SERIAL_PLOTTER
+  #ifdef SERIAL_PLOTTER
+  int a = digitalRead(PIN_MOTORB_CANALA);
+  int b = digitalRead(PIN_MOTORB_CANALB);
+  Serial.print(a*5);
+  Serial.print(" ");
+  Serial.print(b*5);
+  Serial.println();
+  #endif
+  }

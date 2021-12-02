@@ -75,8 +75,7 @@ void loop()
     if (Serial.read() == '\n') break;
   }
   //Cosas que hace el robot.
-  
-
+  delay(200);
   switch(op)
   {
     case 0:
@@ -114,8 +113,8 @@ void loop()
   Serial.println(d);
   #endif
   #ifdef DEBUGGING_
- //myPullup.printMovidas();
-  //myPullup.printGrados();
+ myPullup.printMovidas();
+ myPullup.printGrados();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A).pressed()) Serial.println("ËNDSTOP_A PULSADO");

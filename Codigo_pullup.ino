@@ -1,3 +1,5 @@
+#include <DueTimer.h>
+
 
 #include "DueTimer\DueTimer.h"
 #include "Pullup.h"
@@ -38,7 +40,8 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
-  Timer4.start();
+  Timer4.attachInterrupt(timer_handler).setPeriod(1000).start();
+
   Serial.begin(9600);
 
   //Se ponen los parametros de los pids

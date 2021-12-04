@@ -50,9 +50,9 @@ void setup() {
   myPullup.getControlposicion(C).setGains(KP_B,KI_B,KD_B);
   
   //Mensaje de bienvenida
-  Serial.println("-----------------------------------");
-  Serial.println("-------------- HOLI ---------------");
-  Serial.println("-----------------------------------");
+  //Serial.println("-----------------------------------");
+  //Serial.println("-------------- HOLI ---------------");
+  //Serial.println("-----------------------------------");
   digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
@@ -68,9 +68,9 @@ void loop()
   while(Serial.available())
   {
     op = Serial.parseInt();
-    a = Serial.parseInt();
-    b = Serial.parseInt();
-    c = Serial.parseInt();
+    a = Serial.parseFloat();
+    b = Serial.parseFloat();
+    c = Serial.parseFloat();
     d = Serial.parseInt();
     if (Serial.read() == '\n') break;
   }
@@ -79,7 +79,7 @@ void loop()
   switch(op)
   {
     case 0:
-      myPullup.setPosicionArticulares(a,b,c,d);
+      myPullup.setPosicionArticulares((int) a,(int) b,(int) c,d);
     break;
     case 1: 
       myPullup.goHome();

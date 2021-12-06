@@ -1,21 +1,21 @@
 #include "Encoder.h"
 #include "Parametros.h"
 
-Encoder::Encoder(int canal_A, int canal_B, float grados_por_tic_)
+Encoder_p::Encoder_p(int canal_A, int canal_B, float tics_vuelta)
 {
     pin_canal_A = canal_A;
     pin_canal_B = canal_B;
-    grados_por_tic = grados_por_tic_;
+    grados_por_tic = 360.0/(tics_vuelta);
     posicion_tics = 0;
 }
 
-void Encoder::init()
+void Encoder_p::init()
 {
     pinMode(pin_canal_A, INPUT_PULLUP);
     pinMode(pin_canal_B, INPUT_PULLUP);
 }
 
-void Encoder::actualizar_posicion()
+void Encoder_p::actualizar_posicion()
 {
     if(digitalRead(pin_canal_A) == HIGH)
     {
@@ -24,6 +24,7 @@ void Encoder::actualizar_posicion()
         else
             posicion_tics--;
     }
+   /*
     else
     {
         if(digitalRead(pin_canal_B) == LOW)
@@ -31,26 +32,26 @@ void Encoder::actualizar_posicion()
         else
             posicion_tics++;
     }
-
+*/
 }
 
 
-float Encoder::getPosicionGrados()
+float Encoder_p::getPosicionGrados()
 {
-    return (posicion_tics/grados_por_tic);
+    return (grados_por_tic*posicion_tics);
 }
 
-int Encoder::getTics()
+int Encoder_p::getTics()
 {
     return posicion_tics;
 }
 
-void Encoder::resetPosicion()
+void Encoder_p::resetPosicion()
 {
-    posicion_grados = 0;
+    posicion_tics = 0;
 }
 
-void Encoder::setPosicionGrados(int grados)
+void Encoder_p::setPosicionGrados(int grados)
 {
-    posicion_tics = GRADOS_A_PULSOS(grados);
+    posicion_tics = grados/grados_por_tic;
 }

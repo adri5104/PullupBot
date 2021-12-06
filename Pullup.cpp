@@ -9,22 +9,26 @@ Pullup::Pullup()
     misMotores[B] = new Motor(PIN_MOTORB_IN1, PIN_MOTORB_IN2, PIN_MOTORB_PWM);
     misMotores[C] = new Motor(PIN_MOTORC_IN1, PIN_MOTORC_IN2, PIN_MOTORC_PWM);
 
-    misEncoders[A] = new Encoder(PIN_MOTORA_CANALA, PIN_MOTORA_CANALB, GRADOS_POR_TIC_A);
-    misEncoders[B] = new Encoder(PIN_MOTORB_CANALA, PIN_MOTORB_CANALB, GRADOS_POR_TIC_A);
-    misEncoders[C] = new Encoder(PIN_MOTORC_CANALA, PIN_MOTORC_CANALB, GRADOS_POR_TIC_A);
+    misEncoders[A] = new Encoder_p(PIN_MOTORA_CANALA, PIN_MOTORA_CANALB, TICS_A);
+    misEncoders[B] = new Encoder_p(PIN_MOTORB_CANALA, PIN_MOTORB_CANALB, TICS_B);
+    misEncoders[C] = new Encoder_p(PIN_MOTORC_CANALA, PIN_MOTORC_CANALB, TICS_A);
 
     misEndstops[A] = new Endstop(PIN_ENDSTOPA);
     misEndstops[B] = new Endstop(PIN_ENDSTOPB);
     misEndstops[C] = new Endstop(PIN_ENDSTOPC);
 
-    misControles[A] = new Controlposicion(misMotores[A], misEncoders[A]);
-    misControles[B] = new Controlposicion(misMotores[B], misEncoders[B]);
-    misControles[C] = new Controlposicion(misMotores[C], misEncoders[C]);
+    misControles[A] = new Controlposicion(misMotores[A], misEncoders[A], TICS_A);
+    misControles[B] = new Controlposicion(misMotores[B], misEncoders[B], TICS_B);
+    misControles[C] = new Controlposicion(misMotores[C], misEncoders[C], TICS_A);
 
     miStepper = new Stepper(PIN_STEP,PIN_DIR,RESET,SLEEP);
-    pidStatus = false;
+    pidStatus =true;
     homing = false;
-    setfree = true;
+    setfree = false;
+    setlock = false;
+    this->setPosicionArticulares(0,0,0,0);
+
+
 }
 
 void Pullup::init()
@@ -49,7 +53,7 @@ Motor& Pullup::getMotor(int quemotor)
     return *misMotores[quemotor];
 }
 
-Encoder& Pullup::getEncoder(int queencoder)
+Encoder_p& Pullup::getEncoder(int queencoder)
 {
     return *misEncoders[queencoder];
 }
@@ -66,9 +70,14 @@ Stepper& Pullup::getStepper()
 
 void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC, float mmstepper)
 {
+  
     misControles[A]->setPosicionGrados(gradosA);
+    //delay(400);
     misControles[B]->setPosicionGrados(gradosB);
+    //delay(400);
     misControles[C]->setPosicionGrados(gradosC);
+    //delay(400);
+    
     pidStatus = true;
     setfree = false;
     homing = false;
@@ -91,12 +100,14 @@ void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float 
 
 void Pullup::goHome()
 {
-    //Serial.println("HOMING");
-    #ifdef DEBUGGING_
-    //1erial.println("HOMING");
-    #endif
+  
+    if((!misEndstops[A]->pressed()))
+    {
+        
+    }
+    /*
     //Si todos los endstop se pulsan
-    if((misEndstops[C]->pressed() && (misEndstops[A]->pressed()) && (misEndstops[B]->pressed())))
+    if(a && (b && c))
     {
         homing = false;
         setfree = false;
@@ -120,34 +131,44 @@ void Pullup::goHome()
     {
         misMotores[A]->setStop();
         misEncoders[A]->setPosicionGrados(-45);
+        
+         a = true;
+
     }
     else
     {
         misMotores[A]->setPWM(HOMING_PWM);
         misMotores[A]->setBack();
+        a = false;
     }
 
     if(misEndstops[B]->pressed())
     {
         misMotores[B]->setStop();
         misEncoders[B]->setPosicionGrados(-45);
+         b = true;
     }
     else
     {
         misMotores[B]->setPWM(HOMING_PWM);
         misMotores[B]->setBack();
+        b = false;
     }
 
     if(misEndstops[C]->pressed())
     {
         misMotores[C]->setStop();
         misEncoders[C]->setPosicionGrados(-45);
+        c = true;
+        
     }
     else
     {
         misMotores[C]->setPWM(HOMING_PWM);
         misMotores[C]->setBack();
+        c = false;
     }
+    */
 }
 
 void Pullup::setLock()
@@ -214,10 +235,8 @@ void Pullup::printGrados()
    Serial.print(misEncoders[B]->getPosicionGrados());
    Serial.print(", ");
    Serial.print("Grados: ");
-   Serial.print(misEncoders[C]->getPosicionGrados());
-   Serial.print(", ");
-   Serial.print("MM:");
-   Serial.print(miStepper->getPosition());
+   Serial.println(misEncoders[C]->getPosicionGrados());
+  
 }
 
 void Pullup::setFree()

@@ -5,6 +5,10 @@
 #include <Arduino.h>
 #include <stdio.h>
 
+#define TICS_A 1000
+
+#define TICS_B 1093
+
 #define GRADOS_POR_TIC_A 5.85
 #define GRADOS_POR_TIC_B 5.85
 #define GRADOS_POR_TIC_C 5.85
@@ -12,7 +16,7 @@
 #define GRADOS_A_PULSOS(x) (x)*5.85
 
 // ------- LIMITES -------
-#define MAX_PID_PWM 175
+#define MAX_PID_PWM 255
 #define HOMING_PWM  175
 #define GRAVITY_PWM 150
 
@@ -34,25 +38,25 @@
 #define PIN_MOTORA_IN1 39
 #define PIN_MOTORA_IN2 41
 #define PIN_MOTORA_PWM 3
-#define KP_A 1
-#define KI_A 0
-#define KD_A 0
+#define KP_A 5
+#define KI_A 1
+#define KD_A 0.05
 
 // Motor A
 #define PIN_MOTORB_IN1 33
 #define PIN_MOTORB_IN2 35
 #define PIN_MOTORB_PWM 4
-#define KP_B 1
-#define KI_B 0
-#define KD_B 0
+#define KP_B 5
+#define KI_B 1
+#define KD_B 0.05
 
 // Motor c
 #define PIN_MOTORC_IN1 45
 #define PIN_MOTORC_IN2 43
 #define PIN_MOTORC_PWM 5
-#define KP_C 1
-#define KI_C 0
-#define KD_C 0
+#define KP_C 5
+#define KI_C 1
+#define KD_C 0.05
 
 // Stepper
 #define STEPS_PER_MM 5

@@ -1,11 +1,19 @@
+
+
+//#include <Encoder.h>
+
+#include <PID_v1.h>
+
 #include <DueTimer.h>
 
 
 #include "DueTimer\DueTimer.h"
 #include "Pullup.h"
+
+
 //Nuestro robot
 Pullup myPullup;
-
+//PID myPID(&in,&out,&set,1,1,1,1);
 
 void handler_encoderA()
 {
@@ -40,7 +48,8 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORA_CANALA), handler_encoderA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
-  Timer4.attachInterrupt(timer_handler).setPeriod(1000).start();
+  
+  Timer4.attachInterrupt(timer_handler).setPeriod(100).start();
 
   Serial.begin(9600);
 
@@ -50,9 +59,9 @@ void setup() {
   myPullup.getControlposicion(C).setGains(KP_B,KI_B,KD_B);
   
   //Mensaje de bienvenida
-  //Serial.println("-----------------------------------");
-  //Serial.println("-------------- HOLI ---------------");
-  //Serial.println("-----------------------------------");
+  Serial.println("-----------------------------------");
+  Serial.println("-------------- HOLI ---------------");
+  Serial.println("-----------------------------------");
   digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
@@ -75,11 +84,11 @@ void loop()
     if (Serial.read() == '\n') break;
   }
   //Cosas que hace el robot.
-  delay(200);
+  //delay(20);
   switch(op)
   {
     case 0:
-      myPullup.setPosicionArticulares((int) a,(int) b,(int) c,d);
+      myPullup.setPosicionArticulares( a, b, c,d);
     break;
     case 1: 
       myPullup.goHome();
@@ -97,24 +106,11 @@ void loop()
     break;
   }
   op = 7;
-//ab
-  
 
-  //Si no funciona a la primera, probar a descomentar la siguiente linea
-  #ifdef PRINT_SERIAL
-  Serial.print(op);
-  Serial.print(",");
-  Serial.print(a);
-  Serial.print(",");
-  Serial.print(b);
-  Serial.print(",");
-  Serial.print(c);
-  Serial.print(",");
-  Serial.println(d);
-  #endif
   #ifdef DEBUGGING_
- myPullup.printMovidas();
+// myPullup.printMovidas();
  myPullup.printGrados();
+ //myPullup.SerialPrintPosicionTics();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A).pressed()) Serial.println("ËNDSTOP_A PULSADO");
@@ -122,12 +118,5 @@ void loop()
   if(myPullup.getEndstop(C).pressed()) Serial.println("ËNDSTOP_C PULSADO");
   #endif
   //#define SERIAL_PLOTTER
-  #ifdef SERIAL_PLOTTER
-  int a = digitalRead(PIN_MOTORB_CANALA);
-  int b = digitalRead(PIN_MOTORB_CANALB);
-  Serial.print(a*5);
-  Serial.print(" ");
-  Serial.print(b*5);
-  Serial.println();
-  #endif
+  
   }

@@ -4,21 +4,27 @@
 #include"Motor.h"
 #include"Encoder.h"
 #include"Parametros.h"
+#include <PID_v1.h>
+
+//extern double in, out, set;
 class Controlposicion
 {
     private:
-        int kp;
-        int kd;
-        int ki;
+        float kp;
+        float kd;
+        float ki;
+        double in, out, set;
         long tiempo_previo; //para calcular deltaT
         int referencia_tics; //referencia para el PID en pulsos
         float error_acumulado; //Se va sumando el error
         float error_previo;
+        float grados_por_tic;
         bool motorApagado; //senal digital que habilita o deshabilita el PID();
         Motor* myMotor;
-        Encoder* myEncoder;
+        Encoder_p* myEncoder;
+        PID* myPID;
     public: 
-        Controlposicion(Motor*, Encoder*);
+        Controlposicion(Motor*, Encoder_p*, float);
         void setPosicionTics(int); //LLeva al motor a una posicion en tics;
         void setPosicionGrados(float); //Lleva al motor a una posicion en grados;
         void apagarMotor(); //deja libre el motor;

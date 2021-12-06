@@ -32,19 +32,20 @@ class Pullup
         Controlposicion* misControles[3];
         Motor* misMotores[3];
         Motor* Motor_A;
-        Encoder* misEncoders[3];
+        Encoder_p* misEncoders[3];
         Stepper* miStepper;
         //stepper
         bool pidStatus;
         bool homing;
         bool setfree;
         bool setlock;
+        bool a,b,c;
     public:
         Pullup();
         void init();
 
         Motor& getMotor(int);
-        Encoder& getEncoder(int);
+        Encoder_p& getEncoder(int);
         Controlposicion& getControlposicion(int);
         Stepper& getStepper();
         Endstop& getEndstop(int);

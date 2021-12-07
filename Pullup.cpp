@@ -103,13 +103,46 @@ void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float 
 void Pullup::goHome()
 {
   
-    if((!misEndstops[A]->pressed()))
+
+
+    uint8_t x = misEncoders[A]->getTics();
+    while ((misEndstops[A]->pressed()))
     {
-        
+        misControles[A]->setPosicionTics(x);
+        delay(200);
+        x -= 10;
     }
-    /*
+    misEncoders[A]->setPosicionGrados(40);
+    delay(50);
+    misControles[A] -> setPosicionTics(0);
+    delay(50);
+
+    x = misEncoders[C]->getTics();
+    while ((misEndstops[C]->pressed()))
+    {
+        misControles[C]->setPosicionTics(x);
+        delay(200);
+        x -= 10;
+    }
+    misEncoders[C]->setPosicionGrados(40);
+    delay(50);
+    misControles[C] -> setPosicionTics(0);
+    delay(50);
+
+    x = misEncoders[B]->getTics();
+    while ((misEndstops[B]->pressed()))
+    {
+        misControles[B]->setPosicionTics(x);
+        delay(200);
+        x -= 10;
+    }
+    misEncoders[B]->setPosicionGrados(40);
+    delay(50);
+    misControles[B] -> setPosicionTics(0);
+    delay(50);
+    
     //Si todos los endstop se pulsan
-    if(a && (b && c))
+    /*if(a && (b && c))
     {
         homing = false;
         setfree = false;
@@ -133,7 +166,7 @@ void Pullup::goHome()
     {
         misMotores[A]->setStop();
         misEncoders[A]->setPosicionGrados(-45);
-        
+        misControles[A]->setPosicionGrados(0);
          a = true;
 
     }
@@ -148,12 +181,14 @@ void Pullup::goHome()
     {
         misMotores[B]->setStop();
         misEncoders[B]->setPosicionGrados(-45);
+        misControles[B]->setPosicionGrados(0);
          b = true;
     }
     else
     {
         misMotores[B]->setPWM(HOMING_PWM);
         misMotores[B]->setBack();
+        
         b = false;
     }
 
@@ -161,6 +196,7 @@ void Pullup::goHome()
     {
         misMotores[C]->setStop();
         misEncoders[C]->setPosicionGrados(-45);
+        misControles[C]->setPosicionGrados(0);
         c = true;
         
     }
@@ -169,8 +205,8 @@ void Pullup::goHome()
         misMotores[C]->setPWM(HOMING_PWM);
         misMotores[C]->setBack();
         c = false;
-    }
-    */
+    }*/
+    
 }
 
 void Pullup::setLock()

@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\bin\\arm-none-eabi-g++",
+            "compilerPath": "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\bin\\arm-none-eabi-g++",
             "compilerArgs": [
                 "-std=gnu++11",
                 "-ffunction-sections",
@@ -16,23 +16,23 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\system\\libsam",
-                "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\system\\CMSIS\\CMSIS\\Include\\",
-                "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\system\\CMSIS\\Device\\ATMEL\\",
-                "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\cores\\arduino",
-                "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\variants\\arduino_due_x",
-                "C:\\Users\\adria\\Documents\\Arduino\\libraries\\SimplyAtomic",
-                "C:\\Users\\adria\\Documents\\Arduino\\libraries\\PID",
-                "C:\\Program Files (x86)\\Arduino\\libraries\\DueTimer",
-                "c:\\users\\adria\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3",
-                "c:\\users\\adria\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3\\arm-none-eabi",
-                "c:\\users\\adria\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3\\backward",
-                "c:\\users\\adria\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\lib\\gcc\\arm-none-eabi\\4.8.3\\include",
-                "c:\\users\\adria\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\lib\\gcc\\arm-none-eabi\\4.8.3\\include-fixed",
-                "c:\\users\\adria\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include"
+                "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\system\\libsam",
+                "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\system\\CMSIS\\CMSIS\\Include\\",
+                "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\system\\CMSIS\\Device\\ATMEL\\",
+                "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\cores\\arduino",
+                "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\variants\\arduino_due_x",
+                "C:\\Users\\Antonio\\Documents\\Arduino\\libraries\\SimplyAtomic",
+                "C:\\Users\\Antonio\\Documents\\Arduino\\libraries\\Arduino-PID-Library-master",
+                "C:\\Users\\Antonio\\Documents\\Arduino\\libraries\\DueTimer-1.4.7",
+                "c:\\users\\antonio\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3",
+                "c:\\users\\antonio\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3\\arm-none-eabi",
+                "c:\\users\\antonio\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include\\c++\\4.8.3\\backward",
+                "c:\\users\\antonio\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\lib\\gcc\\arm-none-eabi\\4.8.3\\include",
+                "c:\\users\\antonio\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\lib\\gcc\\arm-none-eabi\\4.8.3\\include-fixed",
+                "c:\\users\\antonio\\appdata\\local\\arduino15\\packages\\arduino\\tools\\arm-none-eabi-gcc\\4.8.3-2014q1\\arm-none-eabi\\include"
             ],
             "forcedInclude": [
-                "C:\\Users\\adria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\cores\\arduino\\Arduino.h"
+                "C:\\Users\\Antonio\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\sam\\1.6.12\\cores\\arduino\\Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",

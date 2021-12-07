@@ -1,12 +1,14 @@
 #include "Encoder.h"
 #include "Parametros.h"
 
+
 Encoder_p::Encoder_p(int canal_A, int canal_B, float tics_vuelta)
 {
     pin_canal_A = canal_A;
     pin_canal_B = canal_B;
     grados_por_tic = 360.0/(tics_vuelta);
     posicion_tics = 0;
+    
 }
 
 void Encoder_p::init()
@@ -24,7 +26,8 @@ void Encoder_p::actualizar_posicion()
         else
             posicion_tics--;
     }
-   /*
+
+    /*
     else
     {
         if(digitalRead(pin_canal_B) == LOW)
@@ -32,17 +35,24 @@ void Encoder_p::actualizar_posicion()
         else
             posicion_tics++;
     }
-*/
+
+    */
+
 }
 
 
 float Encoder_p::getPosicionGrados()
 {
-    return (grados_por_tic*posicion_tics);
+    return (grados_por_tic*getTics());
 }
 
 int Encoder_p::getTics()
 {
+    int pos;
+    ATOMIC()
+    {
+        pos = posicion_tics;
+    }
     return posicion_tics;
 }
 

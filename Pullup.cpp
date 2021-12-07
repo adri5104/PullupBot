@@ -89,7 +89,9 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
 void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float mmstepper)
 {
     misControles[A]->setPosicionTics(ticsA);
+    //delay(400);
     misControles[B]->setPosicionTics(ticsB);
+    //delay(400);
     misControles[C]->setPosicionTics(ticsC);
     pidStatus = true;
     setfree = false;

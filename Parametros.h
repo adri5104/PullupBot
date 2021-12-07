@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <stdio.h>
 
-#define TICS_A 1000
+#define TICS_A 2200
 
 #define TICS_B 1093
 

@@ -4,13 +4,17 @@
 #define _ENCODER_
 #include<Arduino.h>
 
+#include <arm.h>
+
+#include <SimplyAtomic.h>
+
 
 class Encoder_p
 {
     private:
         int pin_canal_A;
         int pin_canal_B;
-        int posicion_tics;
+        volatile int posicion_tics;
         float posicion_grados;
         float grados_por_tic;
 

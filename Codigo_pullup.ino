@@ -1,3 +1,7 @@
+#include <arm.h>
+
+#include <SimplyAtomic.h>
+
 
 
 //#include <Encoder.h>
@@ -49,7 +53,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORB_CANALA), handler_encoderB, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_MOTORC_CANALA), handler_encoderC, CHANGE);
   
-  Timer4.attachInterrupt(timer_handler).setPeriod(100).start();
+  DueTimer::getAvailable().attachInterrupt(timer_handler).setPeriod(1000).start();
 
   Serial.begin(9600);
 
@@ -59,9 +63,9 @@ void setup() {
   myPullup.getControlposicion(C).setGains(KP_B,KI_B,KD_B);
   
   //Mensaje de bienvenida
-  Serial.println("-----------------------------------");
-  Serial.println("-------------- HOLI ---------------");
-  Serial.println("-----------------------------------");
+  //Serial.println("-----------------------------------");
+  //Serial.println("-------------- HOLI ---------------");
+  //Serial.println("-----------------------------------");
   digitalWrite(LED_BUILTIN, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
@@ -73,6 +77,7 @@ int op,a,b,c,d;
 //Lo que se repite
 void loop() 
 {
+  //myPullup.RobotLogic();
   //Lectura del serial
   while(Serial.available())
   {
@@ -88,7 +93,7 @@ void loop()
   switch(op)
   {
     case 0:
-      myPullup.setPosicionArticulares( a, b, c,d);
+      myPullup.setPosicionArticulares_tics( a, b, c,d);
     break;
     case 1: 
       myPullup.goHome();
@@ -109,8 +114,8 @@ void loop()
 
   #ifdef DEBUGGING_
 // myPullup.printMovidas();
- myPullup.printGrados();
- //myPullup.SerialPrintPosicionTics();
+ //myPullup.printGrados();
+ myPullup.SerialPrintPosicionTics();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A).pressed()) Serial.println("ËNDSTOP_A PULSADO");

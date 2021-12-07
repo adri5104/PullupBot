@@ -36,10 +36,10 @@ class Pullup
         Stepper* miStepper;
         //stepper
         bool pidStatus;
-        bool homing;
-        bool setfree;
-        bool setlock;
-        bool a,b,c;
+        bool homing; // variable que indica a logic que debe estar en homing
+        bool setfree; // variable que indica a logic que debe estar en free
+        bool setlock; // variable que indica a logic que debe estar en lock
+        bool a,b,c; //variable que indica si endstop esta en ON
     public:
         Pullup();
         void init();

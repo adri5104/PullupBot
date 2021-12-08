@@ -24,6 +24,7 @@ y devolver la posicion del robot (cinematica directa)
 #include "ControlPosicion.h"
 #include "Stepper.h"
 #include "Endstop.h"
+#include "Pinza.h"
 #include <Arduino.h>
 class Pullup 
 {
@@ -35,6 +36,8 @@ class Pullup
         Encoder_p* misEncoders[3];
         Stepper* miStepper;
         //stepper
+        Pinza* miPinza;
+        
         bool pidStatus;
         bool homing; // variable que indica a logic que debe estar en homing
         bool setfree; // variable que indica a logic que debe estar en free
@@ -49,6 +52,7 @@ class Pullup
         Controlposicion& getControlposicion(int);
         Stepper& getStepper();
         Endstop& getEndstop(int);
+        Pinza& getPinza();
         
         void setPosicionArticulares(float, float, float, float);     
         void setPosicionArticulares_tics(int,int,int,float);
@@ -61,6 +65,8 @@ class Pullup
         void SerialPrintPosicionTics();
         void SerialPrintErrores();
         void HomingAMano();
+        void CambiaPinza();
+
 };
 #endif
 

@@ -127,7 +127,12 @@ void loop()
         case '4': //Este es el caso de Pedir error por lo que las intrucciones son:
           //Aqui le eviaríamos a matlab el error
           myPullup.SerialPrintErrores();
-         break;    
+         break;  
+
+        case '5': 
+          
+          myPullup.CambiaPinza();
+         break;   
     }
   }
 

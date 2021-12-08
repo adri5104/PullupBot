@@ -66,6 +66,12 @@
 #define SLEEP 48
 #define millisbetweensteps 0.005
 
+// Servo
+#define ANG_MAX 255
+#define ANG_MIN 55
+#define PIN_PINZA 8
+#define TRAP_TIME 500
+
 // ------- FINALES DE CARRERA -------
 #define PIN_ENDSTOPA 42
 #define PIN_ENDSTOPB 44

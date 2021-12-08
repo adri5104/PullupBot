@@ -1,6 +1,7 @@
 #include "Parametros.h"
 #include "Stepper.h"
 #include "Pullup.h"
+#include "Pinza.h"
 
 Pullup::Pullup()
 {
@@ -22,6 +23,8 @@ Pullup::Pullup()
     misControles[C] = new Controlposicion(misMotores[C], misEncoders[C], TICS_A);
 
     miStepper = new Stepper(PIN_STEP,PIN_DIR,RESET,SLEEP);
+    miPinza = new Pinza();
+
     pidStatus =true;
     homing = false;
     setfree = false;
@@ -46,6 +49,7 @@ void Pullup::init()
     misEndstops[C]->init();
 
     miStepper->Sinit();
+    miPinza->Servinit(PIN_PINZA);
 }
 
 Motor& Pullup::getMotor(int quemotor)
@@ -66,6 +70,11 @@ Controlposicion& Pullup::getControlposicion(int quecontrol)
 Stepper& Pullup::getStepper()
 {
     return *miStepper;
+}
+
+Pinza& Pullup::getPinza()
+{
+    return *miPinza;
 }
 
 void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC, float mmstepper)
@@ -102,8 +111,6 @@ void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float 
 
 void Pullup::goHome()
 {
-  
-
 
     uint8_t x = misEncoders[A]->getTics();
     while ((misEndstops[A]->pressed()))
@@ -262,6 +269,7 @@ void Pullup::RobotLogic()
     if(misEndstops[C]->pressed()) misMotores[C]->setFree(); 
     */
     miStepper->move();
+    miPinza->move();
 }
 
 void Pullup::printGrados()
@@ -315,4 +323,9 @@ void Pullup::HomingAMano()
     misEncoders[B]->resetPosicion();
     misEncoders[C]->resetPosicion();
     this->setPosicionArticulares(0,0,0,0);
+}
+
+void Pullup::CambiaPinza()
+{
+    miPinza->setStado(!miPinza->getStado());
 }

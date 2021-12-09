@@ -29,7 +29,7 @@ y devolver la posicion del robot (cinematica directa)
 class Pullup 
 {
     private:
-        Endstop* misEndstops[3];
+        Endstop* misEndstops[4];
         Controlposicion* misControles[3];
         Motor* misMotores[3];
         Motor* Motor_A;

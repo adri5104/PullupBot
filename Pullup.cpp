@@ -17,6 +17,7 @@ Pullup::Pullup()
     misEndstops[A] = new Endstop(PIN_ENDSTOPA);
     misEndstops[B] = new Endstop(PIN_ENDSTOPB);
     misEndstops[C] = new Endstop(PIN_ENDSTOPC);
+    misEndstops[S] = new Endstop(PIN_ENDSTOPS);
 
     misControles[A] = new Controlposicion(misMotores[A], misEncoders[A], TICS_A);
     misControles[B] = new Controlposicion(misMotores[B], misEncoders[B], TICS_B);
@@ -47,6 +48,7 @@ void Pullup::init()
     misEndstops[A]->init();
     misEndstops[B]->init();
     misEndstops[C]->init();
+    misEndstops[S]->init();
 
     miStepper->Sinit();
     miPinza->Servinit(PIN_PINZA);
@@ -146,6 +148,18 @@ void Pullup::goHome()
     misEncoders[B]->setPosicionGrados(40);
     delay(50);
     misControles[B] -> setPosicionTics(0);
+    delay(50);
+
+
+    x = miStepper->getPosition();
+    while ((misEndstops[S]->pressed()))
+    {
+        miStepper->prepareMove(x);
+        x += 10;
+    }
+    miStepper->setPosition(600);
+    delay(50);
+    miStepper->prepareMove(0);
     delay(50);
     
     //Si todos los endstop se pulsan

@@ -76,6 +76,7 @@
 #define PIN_ENDSTOPA 42
 #define PIN_ENDSTOPB 44
 #define PIN_ENDSTOPC 46
+#define PIN_ENDSTOPS 48
 
 // ------- DEBUGGING -------
 #define DEBUGGING_
@@ -86,6 +87,6 @@
 #define A 0
 #define B 1
 #define C 2
-
+#define S 3
 
 #endif

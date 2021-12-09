@@ -2,6 +2,7 @@
 #include "Stepper.h"
 #include "Pullup.h"
 #include "Pinza.h"
+#include <PID_v1.h>
 
 Pullup::Pullup()
 {
@@ -98,11 +99,32 @@ void Pullup::setPosicionArticulares(float gradosA, float gradosB, float gradosC,
 }
 
 void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float mmstepper)
-{
+{   
+    misControles[A]->getPID().SetOutputLimits(-155,155);
+    misControles[B]->getPID().SetOutputLimits(-155,155);
+    misControles[C]->getPID().SetOutputLimits(-155,155);
+
     misControles[A]->setPosicionTics(ticsA);
     //delay(400);
     misControles[B]->setPosicionTics(ticsB);
     //delay(400);
+    misControles[C]->setPosicionTics(ticsC);
+    pidStatus = true;
+    setfree = false;
+    homing = false;
+    setlock = false;
+    miStepper->prepareMove(mmstepper);
+}
+
+void Pullup::setPosicionArticulares_tics_BESTIA(int ticsA, int ticsB, int ticsC, float mmstepper)
+{
+    misControles[A]->getPID().SetOutputLimits(-200,230);
+    misControles[B]->getPID().SetOutputLimits(-200,230);
+    misControles[C]->getPID().SetOutputLimits(-200,230);
+    misControles[A]->setPosicionTics(ticsA);
+    delay(350);
+    misControles[B]->setPosicionTics(ticsB);
+    delay(350);
     misControles[C]->setPosicionTics(ticsC);
     pidStatus = true;
     setfree = false;

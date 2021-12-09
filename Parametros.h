@@ -76,12 +76,12 @@
 #define PIN_ENDSTOPA 42
 #define PIN_ENDSTOPB 44
 #define PIN_ENDSTOPC 46
-#define PIN_ENDSTOPS 48
+#define PIN_ENDSTOPS 40
 
 // ------- DEBUGGING -------
-#define DEBUGGING_
-#define PRUEBAS_FINALES_DE_CARRERA
-#define PRINT_SERIAL
+//#define DEBUGGING_
+//#define PRUEBAS_FINALES_DE_CARRERA
+//#define PRINT_SERIAL
 
 //Otras movidas
 #define A 0

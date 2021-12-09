@@ -132,7 +132,28 @@ void loop()
         case '5': 
           
           myPullup.CambiaPinza();
-         break;   
+         break; 
+
+         case '6': //Este es el caso de Enviar posición por lo que las instrucciones son:
+        //Recibir 4 valores que son los pulsos de los 4 motores (Vamos a suponer que los valores los vamos a dar en float.
+        //Como lo que enviaremos desde MatLab será algo así como "2" y luego "1.11111 2.22222 3.333333 4.444444\n". Tendremos que eliminar el \n del final
+
+        float valores_[4];
+            
+        for(int i=0; i<4; i++){     //cogemos los 4 valores y los almacenamos en ese valor
+          valores_[i] = Serial.parseFloat(SKIP_WHITESPACE);  //Con ese comando eliminamos el espacio entre los float    (Tiene TimeOut naiss)
+        }
+
+        myPullup.setPosicionArticulares_tics_BESTIA( valores_[0], valores_[1], valores_[2], valores_[3]);
+
+        //Aqui esperamos a que los motores se muevan a la posición asignada para que no haya desborde de datos
+        //Y enviamos a MatLab los valores nuevos para que se actualicen los pulsos en la interfaz (que dará paso a que matlab envíe nuevos datos).
+
+        myPullup.SerialPrintPosicionTics();
+                
+      // El problema es que en el serial ahora hay dentro un terminator que hay que quitar. Ahora lo va eliminando el Serial.read de op pero no es tan eficiente.
+        
+        break;  
     }
   }
 
@@ -140,7 +161,7 @@ void loop()
   #ifdef DEBUGGING_
 // myPullup.printMovidas();
  //myPullup.printGrados();
- myPullup.SerialPrintPosicionTics();
+ //myPullup.SerialPrintPosicionTics();
   #endif
   #ifdef PRUEBAS_FINALES_DE_CARRERA
   if(myPullup.getEndstop(A).pressed()) Serial.println("ËNDSTOP_A PULSADO");

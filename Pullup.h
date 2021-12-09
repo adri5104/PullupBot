@@ -56,6 +56,8 @@ class Pullup
         
         void setPosicionArticulares(float, float, float, float);     
         void setPosicionArticulares_tics(int,int,int,float);
+        void setPosicionArticulares_tics_BESTIA(int,int,int,float);
+        
         void goHome(); //Hace homing al robot
         void setFree();
         void setLock(); //apaga los motores

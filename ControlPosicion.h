@@ -31,5 +31,6 @@ class Controlposicion
         void setGains(int, int, int); //Para dar las ganancias kp, ki y kd
         void control_logic(); // Donde se actualizan los valores del PID();
         float getError(){return error_previo;};
+        PID& getPID(){return *myPID;};
 };
 #endif

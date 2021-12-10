@@ -52,7 +52,7 @@ void Pullup::init()
     misEndstops[S]->init();
 
     miStepper->Sinit();
-    miPinza->Servinit(PIN_PINZA);
+    miPinza->init(PIN_PINZA);
 }
 
 Motor& Pullup::getMotor(int quemotor)
@@ -118,13 +118,13 @@ void Pullup::setPosicionArticulares_tics(int ticsA, int ticsB, int ticsC, float 
 
 void Pullup::setPosicionArticulares_tics_BESTIA(int ticsA, int ticsB, int ticsC, float mmstepper)
 {
-    misControles[A]->getPID().SetOutputLimits(-200,230);
-    misControles[B]->getPID().SetOutputLimits(-200,230);
-    misControles[C]->getPID().SetOutputLimits(-200,230);
+    misControles[A]->getPID().SetOutputLimits(-255,255);
+    misControles[B]->getPID().SetOutputLimits(-255,255);
+    misControles[C]->getPID().SetOutputLimits(-255,255);
     misControles[A]->setPosicionTics(ticsA);
-    delay(350);
+    delay(400);
     misControles[B]->setPosicionTics(ticsB);
-    delay(350);
+    delay(400);
     misControles[C]->setPosicionTics(ticsC);
     pidStatus = true;
     setfree = false;
@@ -305,7 +305,7 @@ void Pullup::RobotLogic()
     if(misEndstops[C]->pressed()) misMotores[C]->setFree(); 
     */
     miStepper->move();
-    miPinza->move();
+  //  miPinza->move();
 }
 
 void Pullup::printGrados()
@@ -363,5 +363,5 @@ void Pullup::HomingAMano()
 
 void Pullup::CambiaPinza()
 {
-    miPinza->setStado(!miPinza->getStado());
+    miPinza->move();
 }

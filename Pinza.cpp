@@ -5,18 +5,26 @@
 
 Pinza::Pinza() {
 
-    estado=0;
+    estado=false;
 }
 
-void Pinza::Servinit(int servo_Pin){
+void Pinza::init(int servo_Pin){
 
     pinza.attach(servo_Pin);
 }
 
 void Pinza::move() {
 
-    if(estado) pinza.write(ANG_MAX);                     //Estado en 0, abierto
-    else pinza.write(ANG_MIN);                          //Estado en 1, cerrado
+    if(estado == true)
+    { 
+        pinza.write(ANG_MAX);
+        estado = !estado;   
+        }                  //Estado en 0, abierto
+    else
+    {
+        pinza.write(ANG_MIN);  
+        estado = !estado;
+    }                         //Estado en 1, cerrado
 }
 
 bool Pinza::getStado() { return estado; }

@@ -1,20 +1,10 @@
 #include <arm.h>
-
 #include <SimplyAtomic.h>
-
-
-
 //#include <Encoder.h>
-
 #include <PID_v1.h>
-
 #include <DueTimer.h>
-
-
 #include "DueTimer\DueTimer.h"
 #include "Pullup.h"
-
-
 //Nuestro robot
 Pullup myPullup;
 //PID myPID(&in,&out,&set,1,1,1,1);

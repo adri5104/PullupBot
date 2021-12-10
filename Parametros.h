@@ -67,8 +67,8 @@
 #define millisbetweensteps 0.005
 
 // Servo
-#define ANG_MAX 255
-#define ANG_MIN 55
+#define ANG_MAX 180
+#define ANG_MIN 0
 #define PIN_PINZA 8
 #define TRAP_TIME 500
 

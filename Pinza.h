@@ -14,7 +14,7 @@ public:
     void move();
     bool getStado(); //la que envia la posicion en cada instante a matlab
     void setStado(bool);
-    void Servinit(int);
+    void init(int);
     
 private:
     int pinza_pin;

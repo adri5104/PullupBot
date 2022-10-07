@@ -1,0 +1,76 @@
+Conectar Arduino:
+
+1.-tenemos que pulsar el botón para abrir la pestaña para configurar el puerto
+(todo lo demás no debería poder tocarse excepto el botón de conectar)
+2.-En la pestaña abierta, ingresamos los datos del COM (podemos meter una función para que diga que puertos hay)
+
+-------------------
+Podemos implementar que sea una lista de COMS y elijas la opción que quieras
+Un botón de actualizar para que actualice la lista de COMS
+un botón de siguiente para fijar la opción escogida
+-------------------
+
+3.-tambien metemos los datos del baudrate y le damos al botón de aceptar.
+
+(Al aceptar tendría que enviarse a la pestaña principal los datos del COM y del Baudrate, y debería cerrarse la ventana)
+
+(Ahora debería seguir igual que al principio la interfaz, solo pudiendo tocar el boton de configurar y conectar)
+
+4.-Al pulsar el botón de conectar, el arduino se intenta conectar. Deberían pasar 1 de estas dos cosas:
+
+	1.- El arduino está conectado, la luz se pone en verde, la opción de configurar y conectar deberían estar
+	desabilitadas, y el resto de cosas deberían poder tocarse. Se configurar el serialport ese raro
+	
+	
+	--------------------
+	Podría ser interesante añadir un botón de volver a configurar, que quitara el arduino conectado, y volviera a 
+	poder abrirse los botones de configuración y eso
+	--------------------
+
+	2.- El arduino no se ha podido conectar. Deberia seguir el botón en rojo, y habría que intentar volver a conectar
+	el arduino (habría que eliminar las variables que se hubieran creado de conexion de puerto, no se si con la 
+	nueva función tambien pasa)
+
+
+5.-Ya se puede usar la interfaz completa, se han deshabilitado los botones de configurar y conectar y toda la mandanga
+ahora podemos usar la interfaz, que tendrá:
+
+
+
+
+--------------------------------
+cosas  que necesito saber:
+	Espacio de trabajo en X, Y y Z
+	Espacio de trabajo en articulares
+	Que vamos a enviar para homing, set free, que nos envíe errores, posiciones, etc
+	La gráfica del robot implementarla
+
+
+-------------------------------
+
+		Homing			: 1	
+		Set Free		: 0	
+		Cartesiana		: 4
+		Articulares		: 5	
+		Devolver error		: 6	
+		Devolver posición	: 2
+
+[ int , int , int , int , int ]
+   1     2      3    4     5
+
+
+1 da el dato
+2 pulsos un motor
+3 pulsos segundo motor
+4 pulsos tercer motor
+5 pulsos stepper
+
+
+
+
+
+
+
+
+
+

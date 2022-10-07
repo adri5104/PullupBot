@@ -1,0 +1,62 @@
+Serial de Arduino tiene subfunciones. Para enviar o recibir cosas del serial se usan los pines 0 (RX, recibe) y 1 (TX, transmite)
+En teoriaestos pines no hace falta usarlos porque tambien estan conectados al usb. Es el serial. Tambien hay
+serial1, serial2, ...
+
+-if(Serial): Serial es un booleano que da true si el serial está disponible. En Due es SerialUSB
+-available: Da el nº de bytes que tiene disponibles para leer (RX) (los da en int)
+-availableForWrite: Da el nº de bytes que tiene disponibles para escribir (TX) (los da en int)
+-begin: Para iniciar la comunicación serial. Se mete el BaudRate y luego la config
+	que son data-parity-stop bit. data(5-8), parity(N(none)-E(even)-O(odd)), stop bit (1-2)
+-end: Para cortar la comunicación y poner usar los pines 0 y 1 sin problema
+-find: Busca el caracter que se escribe. Devuelve booleano. Borra todo hasta llegar al caracter o al timeout (o a length)
+-findUntil: Igual que Find pero puedes ponerle un Terminator para que pare de buscar ahí.
+-flush: Congela el arduino hasta que el envio de serial (TX) esté vacio.
+-parseFloat: Borra todo el RX hasta encontrar un Float o Timeout. Tiene el modo lookahead para skippear caracteres o no
+	(si no se skippean no funciona si no hay un float al principio y luego tiene ignore para ignorar caracteres entre el mismo float)
+	(float es del tipo xxx.xxxx -- el tipo xxx,xxxx no lo reconoce)
+-parseInt: Igual que parseFloat pero con int.
+-peek: devuelve el caracter (ASCII) que se encuentra el primero en el RX. Si no hay ninguno devuelve -1.  No lo borra. No tiene timeout.
+-print: Envía al RX los valores en caracteres. Se puede especificar el formato que usar (aunque siempre escribe en caracteres.
+	(El return devuelve cuantos bytes ha escrito en formato size_t.
+-println: Igual que el print pero al acabar pone CR/LN que son el los ASCII 13 y 10.
+-read: Lee el primer caracter en ASCII y lo borra. Si no hay valor da -1, no tiene timeout.
+-readBytes: Igual que read, pero especificas donde lo puedes guardar (array de char o bytes) y cuantas veces hace read. Tiene Timeout.
+	(Devuelve en size_t cuantos caracteres ha podido almacenar en el buffer (array). Si no lee nada devuelve 0).
+-readBytesUntil: Igual que readBytes pero añade el finalizar si encuentra un terminator que elimina del RX pero no lo pone en el buffer.
+-readString: igual que read. Devuelve un string con todo lo que hubiera en RX hasta el timeout.
+	(PROBLEMA: Esta funcion no termina hasta el timeout asi que es mala).
+-readTringUntil: Igual que readSring pero se puede definir un terminator que termina la funcion y borra el terminal.
+	(SOLUCIONA el problema del readString porque hace que ya se pueda acabar la funcion sin esperar todo el timeout).
+-setTimeOut: Su valor inicial es 1000ms (1s). Se define con milisegundos y acepta tipos long.
+-write: Envia datos como bytes. Puede enviar tanto un byte como muchos si es string o array si especificas la longitud.
+	(Devuelve cuantos bytes ha devuelto. Si pones numeros te lo lee como bytes y te pone su caracter ascii al contrario que el print)
+	(Congela el arduino hasta que ha podido enviar todo el contenido que le has pedido, se aconseja usar el availableForWrite()).
+
+
+
+Serial MatLab:
+
+
+
+
+
+Comunicacion Arduino-Matlab:
+
+
+SetFree: Enviamos desde Matlab el código "cod: 0". Lo recibe Arduino. ejecuta la operación SetFree y envía a Matlab "Hecho".
+(Lo de hecho es para bloquear la interfaz de hacer otra operación si sigue arduino ejecutando setfree.
+
+Homing: Enviamos desde MatLab el codigo "cod: 1". Lo recibe Arduino. ejecuta la operación Homing y envía a Matlab "Hecho" cuando se acabe.
+
+Enviar posición: Enviamos desde Matlab el código "cod: 2". Lo recibe arduino. Enviamos desde Matlab las 4 posiciones que queremos.
+Enviamos desde arduino los pulsos en los que estan los motores. Al recibir los pulsos Matlab envía otros 4 datos, etc.
+Al final Arduino envia 4 Datos y Matlab por último envía "Hecho". Al enviar Hecho Arduino envía el error y sale del bucle.
+
+Recibir posición: Enviamos desde Matlab el código "cod: 3". Lo recibe Arduino. Envía los 4 valores a MatLab.
+
+
+
+
+
+
+

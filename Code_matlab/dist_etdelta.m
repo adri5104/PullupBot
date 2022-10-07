@@ -1,0 +1,7 @@
+%% FUNCION QUE CALCULA LA DIST (EN X) DEL PUNTO AL QUE QUIERO LLEGAR AL LIMITE DEL ESPACIO DE RABAJO DEL DELTA
+function ddelta= dist_etdelta(sp)
+
+XDELTA=230;
+
+ddelta=XDELTA-abs(sp(1));
+end 

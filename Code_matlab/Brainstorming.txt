@@ -1,0 +1,10 @@
+cosas que quiero añadir a la interfaz
+	-botón de conectar puerto que funcione de verdad
+	-comando serial
+	-implementar el dibujo de belén
+	-botón de posición
+	-botón de velocidad
+	-botón de calibrar
+	-botón de que nos diga posición
+	-dibujo motores con sus respectivas posiciones
+	-historial?
